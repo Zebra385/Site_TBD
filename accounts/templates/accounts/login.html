@@ -1,0 +1,78 @@
+{% extends "store/base.html" %}
+{% block title %} Se connecter {% endblock %}
+
+{% block content%}
+<!-- Masthead-->
+<header class="masthead ">
+    <div class="container h-75 ">
+        <div class="row  align-items-center justify-content-center text-center decorator2">
+            <div class="col-lg-12 ">
+                <h1 class="text-uppercase text-white font-weight-bold">Entrer Login et mot de passe  </h1>
+                <hr class="divider my-4" />
+            </div>
+        </div>   
+        <div class="row h-50">
+            <div class="col-lg-6 decorator3_fond ">     
+                <form  method="post" >
+                    <div class="form-group decorator2">
+                        {% csrf_token %}
+                        
+                            <h5 class=" text-uppercase text-white font-weight-bold">COURRIEL</h5>
+                            {{ form.username }}
+                        
+                       
+                            <h5 class="text-uppercase text-white font-weight-bold">{{ form.password.label_tag }}</h5>
+                            {{ form.password }}
+                        
+                            <button type="submit" class="btn btn-success mx-auto d-block"  value="login">Login</button>
+                            
+                            
+                            <input type="hidden" name="next" value="{{ next }}">
+                            <!-- Reset password-->
+                            <section class="row h-25 group-form decorator2">
+                                <div class="col-lg-7 ">
+                                    <h5 class=" text-uppercase text-white font-weight-bold">Mot de passe oublié?</h5>
+                                </div>
+                                <div class="col-lg-5">
+                                    <a href="{% url 'accounts:reset_password' %}"><h4 class="text-uppercase text-primary"id="site">Renouveler </h4></a>
+                                </div>
+                            </section>
+                        {% if form.errors %}
+                        <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
+                        {% endif %}
+
+                        {% if next %}
+                            {% if user.is_authenticated %}
+                            <p>Your account doesn't have access to this page. To proceed,
+                            please login with an account that has access.</p>
+                            {% else %}
+                            <div class="col-lg-12 text-center" id='alerte'>
+                                <h2 class="text-danger">Vous devez être connecté pour sauvegarder un substitut</h2>
+                                
+                                <hr>
+                            </div>
+                            
+                            {% endif %}
+                        {% endif %}
+                    </div>    
+                </form>
+            </div>
+            <div class="col-lg-6 decorator3_fond">  
+                <section class="row h-25 group-form decorator2">
+                    <div class="col-lg-8 ">
+                     <h5 class=" text-uppercase text-white font-weight-bold">Vous n'avez pas de compte?</h5>
+                    </div>
+                    <div class="col-lg-4">
+                    <a href="{% url 'accounts:register' %}"><h3 class="text-uppercase text-primary"id="site">S'incrire </h3></a>
+                    </div>
+                 
+                </section>
+            </div>
+        </div>
+   </div>
+</header>
+
+
+
+
+{% endblock %}
