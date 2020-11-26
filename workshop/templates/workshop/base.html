@@ -28,10 +28,15 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#about">L'atelier</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#services">Les activités</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">L'atelier</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Les activités</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galerie</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#contact">Se connecter</a></li>
+                        {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:logout' %}"/a><img width="50px" src="{% static 'workshop/assets/img/noun_logout.png' %}" title="{{user.username}}, connecté" alt="Se deconnecter"/></a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:login' %}"/a><img width="50px" src="{% static 'workshop/assets/img/noun_login.png' %}" title="Se connecter" alt="Se connecter"/></a></li>
+                        
+                        {% endif%} 
                     </ul>
                 </div>
             </div>
