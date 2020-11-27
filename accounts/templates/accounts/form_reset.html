@@ -1,0 +1,27 @@
+<!-- Formulaire de réinitialisation-->
+<section class="page-section" id="contact" style="background-color:#86ebe6;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 ">
+                <h1 class="text-uppercase align-items-center text-white font-weight-bold">Complétez le champ suivant: <h1>
+                <hr class="divider my-4" />
+            </div>
+        </div> 
+        <div class="row">
+            <div class="col-lg-12  ">
+                <form  method="post" >
+                    <div class="form-group ">
+                    {% csrf_token %}              
+                    <h5 class="text-uppercase text-white font-weight-bold">{{ form.email.label_tag }}</h5>
+                    {{ form.email }} 
+                                                                        
+                    {% if form.errors %}
+                        <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}.Une erreur c'est produite - Veuillez réessayer.</p>
+                    {% endif %}
+                    <input class="text-uppercase text-primary"id="site" type="submit"  value="ENVOYER">
+                </form>
+            </div>
+        </div>
+        <hr class="divider my-4" />
+    </div>
+</section>
