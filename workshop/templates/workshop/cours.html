@@ -1,0 +1,69 @@
+{% extends "workshop/base.html" %}
+
+{% block title %} Les cours {% endblock %}
+{% block content %}
+{% load static %}
+    <!-- Masthead-->
+        <header class="masthead">
+            <div class="container h-100">
+                <div class="row h-100 align-items-center justify-content-center text-center">
+                    <div class="col-lg-10 align-self-end">
+                        <h1 class="text-uppercase text-white font-weight-bold">Saison 2020-2021</h1>
+                        <hr class="divider my-4" />
+                    </div>
+                    <div class="col-lg-8 align-self-baseline">
+                        <p class="text-uppercase text-danger bg-white p-2 rounded-pill mb-5">En raison de la crise sanitaire que nous traversons, la rentrée est reportée à JANVIER 2021</p>
+                        <p class="text-white-75 font-weight-light mb-5">La Terre au Bout des Doigts organise des cours selon les modalités ci-dessous</p>
+                    </div>
+            </div>
+        </header>
+    <!-- Cours-->
+    <section class="page-section bg-info">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="mt-0 bg-white p-2 rounded-pill mr-4 ml-4">Atelier 2h30 ou 3h par semaine</h2>
+                    <hr class="divider my-4" />
+                    <h2 class="text-white mb-5">Deux types de cours, soit en jounée, soit le soir</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center mb-5 mb-lg-0 text-info bg-white p-2 rounded-left mr-2 ">
+                    <h2 class="text-dark">Atelier 3h en journée</h2>
+                        <hr class="divider my-3" />
+                        <h2>
+                         Mardi de 13h30 à 16h30  </br>
+                         Jeudi de 09h00 à 12h00</br>
+                         et de 13h30 à 16h30 </h2>
+                        <h3>Fournitures non comprises</h3>
+                    </div>
+                
+                <div class="col-lg-4 mr-auto text-center text-info bg-white p-2 rounded-left ml-2 ">
+                    <h2 class="text-dark">Atelier 2h30 en soirée</h2>
+                        <hr class="divider my-3" />
+                        <h2 >
+                         Mardi de 19h30 à 22h </br>
+                         Jeudi de 19h30 à 22h</h2>
+                        <h3>Fournitures non comprises</h3>
+                    </div>
+                </div>
+
+            </div>
+            <div>
+            <hr class="divider my-3" />
+            <h3 class="col-lg-12 text-center text-white ">Les cours ouvriront à raison de 9 participants par atelier</h3>
+            <hr class="divider my-3" />
+            </div>
+            <div class="row justify-content-center">
+            <div class="col-lg-3"> 
+            <a href="{% static 'workshop/pdf/reglement.pdf' %}"><h2 class="mt-0 bg-white p-2 rounded-pill mr-4 ml-4">Reglement.pdf</h2></a>
+            </div>
+            <div class="col-lg-4"> 
+            <a href="{% static 'workshop/pdf/charte_mad_locaux_covid_V2.pdf' %}"><h2 class="mt-0 bg-white p-2 rounded-pill mr-4 ml-4">Charte_Covid_Nantes.pdf</h2></a>
+            </div>
+            <div class="col-lg-4"> 
+            <a href="{% static 'workshop/pdf/Charte_tbd_covid_V2.pdf' %}"><h2 class="mt-0 bg-white p-2 rounded-pill mr-4 ml-4">Charte_Covid_TBD.pdf</h2></a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
