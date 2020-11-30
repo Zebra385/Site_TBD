@@ -28,9 +28,9 @@
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">L'atelier</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="">Les activités</a></li>
-                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galerie</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:cours' %}">Les cours</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:stages' %}">Les stages</a></li>
+                        {% comment %} <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galerie</a></li> {% endcomment %}
                         {% if user.is_authenticated %}
                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:logout' %}"/a>Se déconnecter</a></li>
                         {% else %}
