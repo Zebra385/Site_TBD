@@ -11,8 +11,8 @@ class CreatUserForm(UserCreationForm):
     """
 
     class Meta:
-        # model = get_user_model()
-        model = CustomUser()
+        model = get_user_model()
+        # model = CustomUser()
         
         fields = UserCreationForm.Meta.fields + ('email', 'username', 'password1', 'password2',)
 
