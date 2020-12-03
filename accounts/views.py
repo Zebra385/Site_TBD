@@ -3,7 +3,7 @@ from django.contrib.auth import logout, login
 from django.views.generic.base import View
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
-
+from django.http import HttpResponseRedirect
 
 class LoginUser(LoginView):
     """
@@ -26,3 +26,28 @@ class MyLogoutView(LogoutView):
         logout(request)
         # Redirect to a accueil page.
         return HttpResponseRedirect('/')
+
+class RegistrationView(View):
+    """That class to load the members in django admin"""
+    form_class = CreatUserForm
+    template_name = 'accounts/register.html'
+
+    def get(self, request, *args, **kwargs):
+        form = self.form_class()
+        context = {'form': form}
+        return render(request, self.template_name, context)
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request,
+                  user,
+                  backend='accounts.backends.EmailBackend')
+            return HttpResponseRedirect("/")
+        else:
+            print('form est:non valid')
+            print(form.errors)
+            context = {'form': form}
+            return render(request,  self.template_name, context)

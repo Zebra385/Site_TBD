@@ -2,6 +2,7 @@
 from django.urls import path, reverse_lazy
 from .views import MyLogoutView
 from .views import LoginUser
+from .views import RegistrationView
 from django.contrib.auth import views as auth_views
 
 app_name = "accounts"
@@ -25,5 +26,5 @@ urlpatterns = [
     path('reset_password_complete/', auth_views.PasswordResetCompleteView.as_view(
         template_name='accounts/password_reset_done.html'),
          name="password_reset_complete"),
-    
+    path('register/', RegistrationView.as_view(), name="register"),
 ]
