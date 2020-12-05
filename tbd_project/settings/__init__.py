@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'workshop.apps.WorkshopConfig',
+    'members.apps.MembersConfig',
     
 ]
 
@@ -142,7 +143,7 @@ INTERNAL_IPS = ['127.0.0.1']
 TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'template')]
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/members/PageMember'
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -152,4 +153,5 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'houche.zebra385@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = ' '
+

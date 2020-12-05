@@ -130,3 +130,6 @@ dmypy.json
 
 #template enregistrement adhérents
 accounts/templates/accounts/register.html
+
+#fichier setting pour la production
+tbd_project/settings/production.py
