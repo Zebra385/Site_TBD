@@ -24,6 +24,8 @@ urlpatterns = [
     path('workshop/', include('workshop.urls')),
     #  importation of the url from app accounts
     path('accounts/', include('accounts.urls')),
+    #  importation of the url from app members
+    path('members/', include('members.urls')),
     path('admin/', admin.site.urls),
 ]
 
