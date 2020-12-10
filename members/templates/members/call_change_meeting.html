@@ -1,0 +1,46 @@
+<!-- Demande d'échange de séance-->
+
+
+   
+        
+         <form   action="/members/PageMember" method="POST" name="EchangeMeetingForm" accept-charset="utf-8">
+            {% csrf_token %}
+                
+                <div class="row form-inline">
+                    <div class="col-lg-9 ">
+                        <h3 class="text text-white font-weight-bold">(Mme/M.) {{user.username}} aimerait échanger sa séance du</h3> 
+                        <label for="{{ form.call_meeting.id_for_label }}"></label>
+                    </div>
+                    <div class="col-lg-3 ">
+                        {{form.call_meeting }}
+                        
+                    </div>
+                   
+                </div>
+                <div class="row form-inline">
+                    <div class="col-lg-9 align-self-end">
+                        <h3 class="text text-white font-weight-bold"> avec le groupe du  </h3>
+                        <label for="{{ form.groupe.id_for_label }}"></label>
+                     </div>
+                    <div class="col-lg-3 ">
+                        {{form.groupe }}
+                    </div>
+                    
+                <div class="row form-inline align-self-end">
+                    
+                    <h3 class="text text-white font-weight-bold">Je suis libre le </h3>
+                    <label for="{{ form.free_date.id_for_label }}"></label></h3>
+                    {{ form.free_date1 }}
+                    <h3 class="text text-white font-weight-bold">ou le  </h3>
+                    {{ form.free_date2 }}
+                    <h3 class="text text-white font-weight-bold">ou le  </h3>
+                    {{ form.free_date3 }}
+                    <hr class="divider my-4" />
+                    
+                </div> 
+                    
+                <button type="submit" class=" btn btn-success " value="Chercher">Envoyer Demande</button>
+              
+                
+        </form>
+

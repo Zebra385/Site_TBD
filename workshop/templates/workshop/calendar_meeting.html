@@ -1,0 +1,90 @@
+<!-- Calendrier des séances-->
+
+<section class="page-section" id="contact" background-color="#86ebe6">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <h2 class="mt-0">Calendrier des séances</h2>
+                <hr class="divider my-4" />
+            </div>
+        </div>
+        <div class="row justify-content-center table-responsive[-sm|-md|-lg|-xl]">
+            <table data-toggle="table" >
+                <thead>
+                    <tr class="table-active text-center">
+                        <th>Mois</th>
+                        <th colspan="5">mardi</th>
+                        <th colspan="5">mercredi</th>
+                        <th colspan="5">jeudi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                   
+                    <tr>
+                        <td class="table-primary">Janvier</td>
+                        {% for date in janary_list %}
+                            {% if date.month == 9 %} 
+                                <td class="table-primary">.</td>
+                            {% else%}      
+                                <td class="table-primary">{{date.day}}</td>
+                            {% endif %}
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Février</td>
+                        {% for date in february_list%}
+                            {% if date.month == 9 %} 
+                                <td class="table-secondary">.</td>
+                            {% else%}      
+                                <td class="table-secondary">{{date.day}}</td>
+                            {% endif %}            
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Mars</td>
+                        {% for date in mars_list%}
+                            {% if date.month == 9 %} 
+                                <td class="table-primary">.</td>
+                            {% else%}      
+                                <td class="table-primary">{{date.day}}</td>
+                            {% endif %}            
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Avril</td>
+                        {% for date in april_list%}
+                            {% if date.month == 9 %} 
+                                <td class="table-secondary">.</td>
+                            {% else%}      
+                                <td class="table-secondary">{{date.day}}</td>
+                            {% endif %}            
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="table-primary">Mai</td>
+                        {% for date in may_list%}
+                            {% if date.month == 9 %} 
+                                <td class="table-primary">.</td>
+                            {% else%}      
+                                <td class="table-primary">{{date.day}}</td>
+                            {% endif %}            
+                        {% endfor %}
+                    </tr>
+                    <tr>
+                        <td class="table-secondary">Juin</td>
+                        {% for date in jun_list%}
+                            {% if date.month == 9 %} 
+                                <td class="table-secondary">.</td>
+                            {% else%}      
+                                <td class="table-secondary">{{date.day}}</td>
+                            {% endif %}            
+                        {% endfor %}
+                    </tr>
+                        
+                        
+                    </tr>
+                </tbody> 
+            </table>
+        </div>
+    </div>
+</section>

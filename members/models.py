@@ -1,5 +1,7 @@
 from django.db import models
 from django.conf import settings
+from datetime import date
+import datetime
 
 DICTIONNARY_MEETING = (
     ["Mardi","13h30-16h30",3],
@@ -8,7 +10,15 @@ DICTIONNARY_MEETING = (
     ["Jeudi","09h00-12h00",3],
     ["Jeudi","13h30-16h30",3],
 )
-
+def day_list(list,number_day_week):
+    """function to load the date per day of week and and by month"""
+    day_list= []
+    for day in list:
+        day_week = date(int(day.date_meeting.date.year),int(day.date_meeting.date.month),int(day.date_meeting.date.day)).weekday()
+        
+        if day_week == number_day_week:
+            day_list.append(day.date_meeting.date)
+    return day_list
 
 # Create your models here.
 class Meeting(models.Model):
@@ -19,8 +29,7 @@ class Meeting(models.Model):
     time_slot = models.CharField(max_length=15)
     time = models.FloatField(max_length=2)
 
-    def __str__(self):
-        return self.day + "-" + self.time_slot
+   
 
     class Meta:
         """
@@ -39,8 +48,7 @@ class Gang(models.Model):
         )
     meeting_id = models.ForeignKey(Meeting, on_delete=models.CASCADE)
 
-    def __str__(self):
-            return self.meeting_id
+   
 
     class Meta:
         """
@@ -56,8 +64,7 @@ class CalendarMeeting(models.Model):
     date = models.DateField()
 
 
-    def __str__(self):
-            return self.date
+  
 
     class Meta:
         """
@@ -75,8 +82,7 @@ class CalendarCustomuser(models.Model):
         )
     date_meeting = models.ForeignKey(CalendarMeeting, on_delete=models.CASCADE)
 
-    def __str__(self):
-            return self.date_meeting
+    
 
     class Meta:
         """
@@ -95,11 +101,12 @@ class ExchangeMeeting(models.Model):
     acceptor_meeting = models.ManyToManyField(CalendarMeeting, related_name='acceptor_meeting', blank=True)
     exchange_operational = models.BooleanField()
 
-    def __str__(self):
-            return self.caller_id
+    
 
     class Meta:
         """
         That class to can choice a name of our database in  mode admin
         """
         verbose_name = "Echange séance"
+
+        
