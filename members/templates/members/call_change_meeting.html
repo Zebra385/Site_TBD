@@ -3,16 +3,16 @@
 
    
         
-         <form   action="/members/PageMember" method="POST" name="EchangeMeetingForm" accept-charset="utf-8">
+         <form   action="" method="POST" name="EchangeMeetingForm" accept-charset="utf-8">
             {% csrf_token %}
                 
                 <div class="row form-inline">
-                    <div class="col-lg-9 ">
-                        <h3 class="text text-white font-weight-bold">(Mme/M.) {{user.username}} aimerait échanger sa séance du</h3> 
+                    <div class="col-lg-8 ">
+                        <h3 class="text text-white font-weight-bold">(Mme/M.)  {{form.auth_user}} aimerait échanger sa séance du</h3> 
                         <label for="{{ form.call_meeting.id_for_label }}"></label>
                     </div>
-                    <div class="col-lg-3 ">
-                        {{form.call_meeting }}
+                    <div class="col-lg-4 ">
+                        {{form.call_meeting}}
                         
                     </div>
                    

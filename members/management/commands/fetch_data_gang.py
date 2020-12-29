@@ -28,8 +28,8 @@ class Command(BaseCommand):
                 meeting_id=Meeting.objects.get(pk=number_gang+1)
                 print(" le numero du nom est:",auth_user.id,'pour le cours numero ',meeting_id.id)
                 Gang.objects.update_or_create(
-                    auth_user=auth_user.id,
-                    meeting_id=meeting_id.id,
+                    auth_user=auth_user,
+                    meeting_id=meeting_id,
                    
                     )
         # test

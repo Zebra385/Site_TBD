@@ -128,8 +128,14 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-#template enregistrement adhérents
+#template to load members
 accounts/templates/accounts/register.html
 
-#fichier setting pour la production
+# File setting to the production
 tbd_project/settings/production.py
+
+# File users
+customuser.json
+
+# command to  verify the  datas
+members/management/commands/control_data_customuser.py

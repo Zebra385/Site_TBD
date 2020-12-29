@@ -1,0 +1,102 @@
+{% extends "workshop/base.html" %}
+{% block title %} les demandes d'échanges de séances en cours {% endblock %}
+{% block content%}
+   <!-- Masthead-->
+    <header class="masthead">
+        <div class="container h-100">
+            {% csrf_token %}
+            <div class="row h-100 align-items-center justify-content-center text-center">
+                <!-- calendier de demande d'échange de séance-->
+                <div class="col-lg-12 text-center">
+                    <hr class="divider my-6" />
+                    <h2 class="mt-0">(Mme/M.){{user.username}})</h2>
+                    <h2 class="mt-0">Voici les demandes d'échange de séance</h2>
+                    
+                </div>
+                {%for meeting in listexchangemeeting%} 
+                {%if meeting.exchange_meeting.exchange_operational is False and meeting.exchange_meeting.caller_id != user.username %}
+                <div class="col-lg-12 text-center">
+                 <h2 class="mt-0">(Mme/M.) {{meeting.exchange_meeting.caller}}aimerait échanger sa séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
+                </div>
+                
+                <form     method="POST"  accept-charset="utf-8">
+                    {% csrf_token %}
+                    
+                     <div class="row form-inline">
+                        <ul>
+                        cocher votre choix
+                        <li><input type="checkbox" name="elements" value="1">{{meeting.date_meeting1}}</li>
+                        <li><input type="checkbox" name="elements" value="2">{{meeting.date_meeting2}}</li>
+                        <li><input type="checkbox" name="elements" value="3">{{meeting.date_meeting3}}</li>
+                        </ul>
+                            {% comment %} <div class="col-lg-8 ">
+                                
+                                    <h3 class="text text-white font-weight-bold">Je suis libre le {{meeting.date_meeting1}}</h3> 
+
+                                    
+                            </div>
+                            <div class="col-lg-8 ">
+                                
+                                    <h3 class="text text-white font-weight-bold">Je suis libre le {{meeting.date_meeting2}}</h3> 
+
+                                    
+                            </div>
+                            <div class="col-lg-8 ">
+                                
+                                    <h3 class="text text-white font-weight-bold">Je suis libre le {{meeting.date_meeting3}}</h3> 
+
+                                    
+                            </div> 
+                 {% endcomment %}
+                    {% comment %} <div class="col-lg-8 ">
+                        <h3 class="text text-white font-weight-bold">(Mme/M.)  {{meeting.caller_id}} aimerait échanger sa séance du{{metting.caller_metting}}</h3> 
+                        <h3 class="text text-white font-weight-bold">avec le groupe du {{form.groupe}}</h3>
+                    </div>
+                    
+                        
+                    
+                        <div class="row form-inline">
+                        
+                            <div class="col-lg-8 ">
+                                
+                                    <h3 class="text text-white font-weight-bold">(Je suis libre le </h3> 
+
+                                    <label for="{{ form.date_meeting1 }}"></label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                {{form.date_meeting1}}
+                                
+                            </div>
+                            <div class="col-lg-8 ">
+                                
+                                    <h3 class="text text-white font-weight-bold">(Je suis libre le </h3> 
+
+                                    <label for="{{ form.date_meeting2 }}"></label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                {{form.date_meeting2}}
+                                
+                            </div>
+                            <div class="col-lg-8 ">
+                                
+                                    <h3 class="text text-white font-weight-bold">(Je suis libre le </h3> 
+
+                                    <label for="{{ form.date_meeting3 }}"></label>
+                            </div>
+                            <div class="col-lg-4 ">
+                                {{form.date_meeting3}}
+                                
+                            </div>
+                            <button type="submit" class=" btn btn-success " value="Chercher">Accord Pour Echange</button>
+                        </div> {% endcomment %}
+                        <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{meeting.pk}}">
+		                <input  class=" form-control text-uppercase text-primary"id="site"   type="submit" value="Choisir cette échanger">
+                    </form>
+                {% endif%}
+                {% endfor%} 
+                {% comment %} {% endfor %}  {% endcomment %}
+            </div>
+        </div>
+
+    </header>
+{% endblock %}
