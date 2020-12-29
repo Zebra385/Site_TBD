@@ -1,12 +1,12 @@
 from django.core.management.base import BaseCommand
 from members.models import Meeting, Gang, CalendarCustomuser, CalendarMeeting
 from accounts.models import CustomUser
-from workshop.models import good_list,day_list
+from members.create_calendar import good_list,day_list
 
 class Command(BaseCommand):
     
-    help = 'Va permettre de remplir la table(CalendarCustomusergang,...)\
-            de notre base de données'
+    help = 'Load the table(CalendarCustomuser,...)\
+            of our DataBase'
 
     
 
@@ -37,7 +37,7 @@ class Command(BaseCommand):
                     if number_gang.day == "Mardi" :
                        meeting= self.tuesday_list
                     # pour  wenesday
-                    if number_gang.day =="Mercredi":
+                    if number_gang.day == "Mercredi":
                         meeting= self.wenesday_list
                     # pour  thursday
 
@@ -58,6 +58,6 @@ class Command(BaseCommand):
                     pass
     
         # test
-        all_calendar_customuser = CalendarCustomuser.objects.all()
+        all_calendar_customuser = CalendarCustomuser.objects.filter(auth_user=12)
         for m in all_calendar_customuser:
             print("numero ", m.id," le nom est:",m.auth_user,'pour le cours du: ',m.date_meeting.date)

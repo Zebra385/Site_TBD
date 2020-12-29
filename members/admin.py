@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Meeting, Gang, CalendarMeeting, CalendarCustomuser, ExchangeMeeting
+from .models import Meeting, Gang, CalendarMeeting, CalendarCustomuser,  ExchangeMeeting, ListExchangeMeeting
 
 # Register your models here.
 
@@ -26,4 +26,9 @@ class CalendarCustomuserAdmin(admin.ModelAdmin):
 
 @admin.register(ExchangeMeeting)
 class ExchangeMeetingAdmin(admin.ModelAdmin):
+    pass
+
+
+@admin.register(ListExchangeMeeting)
+class ListExchangeMeetingAdmin(admin.ModelAdmin):
     pass

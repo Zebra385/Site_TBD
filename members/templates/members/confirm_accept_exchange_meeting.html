@@ -1,5 +1,5 @@
 {% extends "workshop/base.html" %}
-{% block title %} Demande d'échange de séance {% endblock %}
+{% block title %} Confirmation d'acceptation d'échange de séance {% endblock %}
 
 {% block content%}
     {% load static %}
@@ -8,13 +8,12 @@
         <div class="container h-100">
             <div class="row h-100 align-items-center justify-content-center text-center">
                 
-                <!-- Demande d'échange de séance-->
-                {% include 'members/call_change_meeting.html'  %} 
+            <h2 class="text-uppercase text-white font-weight-bold">(Mme/M.) {{user.username}} un email de confirmation vient de vous être envoyer à vous et au demandeur de l'échange de séances </h2>
+                 
             </div>
         </div>
     </header>
-    <!-- Formulaire de connexion pour l'administrateur-->
-    {% comment %} {% include 'accounts/form_login.html' %} {% endcomment %}
+   
 
    
 {% endblock %}
