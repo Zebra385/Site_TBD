@@ -5,6 +5,7 @@ from django.shortcuts import render
 from django.contrib.auth.views import LoginView, LogoutView
 from django.http import HttpResponseRedirect
 
+
 class LoginUser(LoginView):
     """
     That class to login a user of the site
@@ -20,15 +21,19 @@ class LoginUser(LoginView):
 
 
 class MyLogoutView(LogoutView):
-    """ That class to login out a user of site"""
+    """ That class to logout a user of site"""
 
     def post(self, request):
         logout(request)
         # Redirect to a accueil page.
         return HttpResponseRedirect('/')
 
+
 class RegistrationView(View):
-    """That class to load the members in django admin"""
+    """
+    That class to load the members in django admin
+    This is reserved to the administrator
+    """
     form_class = CreatUserForm
     template_name = 'accounts/register.html'
 

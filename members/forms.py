@@ -1,14 +1,12 @@
 from django import forms
-from django.forms import ModelForm
-from .models import ExchangeMeeting
-from members.models import CalendarCustomuser, CalendarMeeting, Gang, Meeting, ListExchangeMeeting, ExchangeMeeting
-from accounts.models import CustomUser
-from django.forms import ModelChoiceField
+from members.models import CalendarMeeting, Meeting
 from datetime import date
 
-# exchangemeeting=ExchangeMeeting1.objects.filter(exchange_operational=False)
-# meeting=ListExchangeMeeting1.objects.get(exchange_meeting_id=exchangemeeting)
+
 class DateSelectorWidget(forms.MultiWidget):
+    """
+    def a widget to choice a date par day month and year
+    """
     def __init__(self, attrs=None):
         days = [(day, day) for day in range(1, 32)]
         months = [(month, month) for month in range(1, 13)]
@@ -34,24 +32,58 @@ class DateSelectorWidget(forms.MultiWidget):
         return '{}-{}-{}'.format(year, month, day)
 
 
-
-
 class ExchangeMeetingForm(forms.Form):
     """
     That form class to call a demand of change meeting
     """
-    
-    auth_user = forms.CharField(max_length=20)
-    call_meeting = forms.DateField(widget=DateSelectorWidget)
-    groupe = forms.ModelChoiceField(Meeting.objects.all(),to_field_name="day",empty_label="---  Choisir un jour  ---")
-    free_date1 = forms.DateField(widget=DateSelectorWidget)
-    free_date2 = forms.DateField(widget=DateSelectorWidget, required=False)
-    free_date3 = forms.DateField(widget=DateSelectorWidget, required=False)
-    
-# class ListExchangeMeetingForm1(forms.Form,choice):
-#     """
-#     That form class to show and accept a exchange of meeting
-#     """
-#     days = forms.ChoiceField(Choices=choices)
-#     # list_day = forms.ModelMultipleChoiceField(queryset=ListExchangeMeeting().objects.all(), to_field_name="date_meeting1", required=False, widget=forms.CheckboxSelectMultiple
-#     # )
+    auth_user = forms.CharField(max_length=12,
+                                widget=forms.TextInput(
+                                    attrs={'size': '10'}
+                                    )
+                                )
+    call_meeting = forms.DateField(label='Séance du demandeur',
+                                   widget=DateSelectorWidget
+                                   )
+    groupe = forms.ModelChoiceField(Meeting.objects.all(),
+                                    empty_label="---  Choisir un jour  ---"
+                                    )
+    free_date1 = forms.DateField(label='Première date de libre',
+                                 widget=DateSelectorWidget
+                                 )
+    free_date2 = forms.DateField(label='Deuxième date de libre',
+                                 widget=DateSelectorWidget,
+                                 required=False
+                                 )
+    free_date3 = forms.DateField(label='Troisième date de libre',
+                                 widget=DateSelectorWidget,
+                                 required=False
+                                 )
+
+    def clean(self):
+        cleaned_data = super().clean()
+        # créer le calendrier
+        calendar = []
+        calendar_all = CalendarMeeting.objects.all().order_by('date')
+        for day in calendar_all:
+            print('date vaut :', day.date)
+            calendar.append(day.date)
+        # calendar = list(calendar.date)
+        # print('le calendar est : ', calendar)
+        call_meeting = cleaned_data.get("call_meeting")
+
+        free_date1 = cleaned_data.get("free_date1")
+        free_date2 = cleaned_data.get("free_date2")
+        free_date3 = cleaned_data.get("free_date3")
+
+        if call_meeting not in calendar:
+            msg = "Votre date de séance n\'existe pas!"
+            self.add_error('call_meeting', msg)
+        elif free_date1 not in calendar:
+            msg = "Cette date de séance n\'existe pas!"
+            self.add_error('free_date1', msg)
+        elif free_date2 not in calendar:
+            msg = "Cette date de séance n\'existe pas!"
+            self.add_error('free_date2', msg)
+        elif free_date3 not in calendar:
+            msg = "Cette date de séance n\'existe pas!"
+            self.add_error('free_date3', msg)

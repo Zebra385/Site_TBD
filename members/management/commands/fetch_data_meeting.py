@@ -3,9 +3,9 @@ from members.models import Meeting, DICTIONNARY_MEETING
 
 
 class Command(BaseCommand):
-    
-    help = 'Va permettre de remplir les tables(Meeting,...)\
-            de notre base de données'
+
+    help = 'Load the table(Meeting,)\
+            in our database'
 
     def handle(self, *args, **options):
         """
@@ -18,4 +18,3 @@ class Command(BaseCommand):
                 time_slot=day[1],
                 time=day[2],
                 )
- 
