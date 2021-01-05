@@ -1,4 +1,4 @@
-<!-- Formulaire de connexion-->
+<!-- Login Form-->
 <section class="page-section bg-info" id="contact" >
     <div class="container">
         <div class="row justify-content-center">
@@ -7,38 +7,29 @@
                 <hr class="divider my-4" />
             </div>
         </div>   
-    
         <div class="col-lg-8  ">     
             <form  method="post" >
                 <div class="form-group ">
-                    {% csrf_token %}
-                    
+                {% csrf_token %}
                     <h5 class=" text-uppercase text-white font-weight-bold">COURRIEL</h5>
-                    {{ form.username }}
-                
-            
+                    {{ form.username }}           
                     <h5 class="text-uppercase text-white font-weight-bold">{{ form.password.label_tag }}</h5>
-                    {{ form.password }}
-                
-                    <button type="submit" class="btn btn-success mx-auto d-block"  value="login">Se connecter</button>
-                    
-                    
+                    {{ form.password }}                
+                    <button type="submit" class="btn btn-success mx-auto d-block"  value="login">Se connecter</button>                   
                     <input type="hidden" name="next" value="{{ next }}">
                     <hr class="divider my-4" />
                     <!-- Reset password-->
-                    
                         <div class="col-lg-5 ">
                             <h5 class=" text-uppercase text-warning font-weight-bold">Mot de passe oublié?</h5>
                         </div>
                         <div class="col-lg-4">
                             <a href="{% url 'accounts:reset_password' %}"><h4 class="text-uppercase text-white bg-warning ml-4 pl-2  ">Renouveler </h4></a>
-                        </div>
-                    
+                        </div>                    
                     {% if form.errors %}
                         <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
                     {% endif %}
                 </div>    
             </form>
         </div>
-   
+    </div>
 </section>

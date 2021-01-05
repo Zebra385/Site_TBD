@@ -7,5 +7,5 @@
 ### You like artists, then this site is for you
 ## 2. How to go on the web site ?
 ### You open a explorer than Firefox, Chrome or another
-### You write the IP:
-### Soon, the site is still under development
+### The adress is: https://terreboutdoigts.fr/
+### That all!

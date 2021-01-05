@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Meeting, Gang, CalendarMeeting, CalendarCustomuser,  ExchangeMeeting, ListExchangeMeeting
+from .models import Meeting, Gang, CalendarMeeting
+from .models import CalendarCustomuser,  ExchangeMeeting, ListExchangeMeeting
 
 # Register your models here.
 

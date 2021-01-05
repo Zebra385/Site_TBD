@@ -1,25 +1,15 @@
 from django.db import models
 from django.conf import settings
-from datetime import date
-import datetime 
-from django.forms import ModelChoiceField
-
-# class CalendarMeetingModelChoiceField(ModelChoiceField):
-#     def label_from_instance(self, obj):
-        
-#         return datetime.date(obj.date)
-
-
 
 DICTIONNARY_MEETING = (
-    ["Mardi","13h30-16h30",3],
-    ["Mardi","19h30-22h00",3.5],
-    ["Mercredi","19h30-22h00",2.5],
-    ["Jeudi","09h00-12h00",3],
-    ["Jeudi","13h30-16h30",3],
+    ["Mardi", "13h30-16h30", 3],
+    ["Mardi", "19h30-22h00", 3.5],
+    ["Mercredi", "19h30-22h00", 2.5],
+    ["Jeudi", "09h00-12h00", 3],
+    ["Jeudi", "13h30-16h30", 3],
 )
 
-# Create your models here.
+
 class Meeting(models.Model):
     """
     This class to load different meetings per week
@@ -29,7 +19,7 @@ class Meeting(models.Model):
     time = models.FloatField(max_length=2)
 
     def __str__(self):
-        return self.day + "-" +self.time_slot
+        return self.day + "-" + self.time_slot
 
     class Meta:
         """
@@ -48,8 +38,6 @@ class Gang(models.Model):
         )
     meeting_id = models.ForeignKey(Meeting, on_delete=models.CASCADE)
 
-   
-
     class Meta:
         """
         That class to can choice a name of our database in  mode admin
@@ -65,13 +53,13 @@ class CalendarMeeting(models.Model):
 
     def __str__(self):
         return self.date.isoformat()
-  
 
     class Meta:
         """
         That class to can choice a name of our database in  mode admin
         """
         verbose_name = "Calendrier Séances"
+
 
 class CalendarCustomuser(models.Model):
     """
@@ -81,9 +69,10 @@ class CalendarCustomuser(models.Model):
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         )
-    date_meeting = models.ForeignKey(CalendarMeeting, on_delete=models.CASCADE)
+    date_meeting = models.ForeignKey(CalendarMeeting,
+                                     on_delete=models.CASCADE
+                                     )
 
-    
     def __str__(self):
         return u'{0}'.format(self.date_meeting.date)
 
@@ -98,10 +87,26 @@ class ExchangeMeeting(models.Model):
     """
     This class to load the  meetings of a customuser
     """
-    caller = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='caller2', null=True, on_delete=models.CASCADE)
-    caller_meeting = models.ForeignKey(CalendarMeeting, related_name='caller2_meeting', null=True, on_delete=models.CASCADE)
-    acceptor = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='acceptor2', null=True, on_delete=models.CASCADE)
-    acceptor_meeting = models.ForeignKey(CalendarMeeting, related_name='acceptor2_meeting', null=True, on_delete=models.CASCADE)
+    caller = models.ForeignKey(settings.AUTH_USER_MODEL,
+                               related_name='caller2',
+                               null=True,
+                               on_delete=models.CASCADE
+                               )
+    caller_meeting = models.ForeignKey(CalendarMeeting,
+                                       related_name='caller2_meeting',
+                                       null=True,
+                                       on_delete=models.CASCADE
+                                       )
+    acceptor = models.ForeignKey(settings.AUTH_USER_MODEL,
+                                 related_name='acceptor2',
+                                 null=True,
+                                 on_delete=models.CASCADE
+                                 )
+    acceptor_meeting = models.ForeignKey(CalendarMeeting,
+                                         related_name='acceptor2_meeting',
+                                         null=True,
+                                         on_delete=models.CASCADE
+                                         )
     exchange_operational = models.BooleanField()
 
     # def __str__(self):
@@ -113,16 +118,35 @@ class ExchangeMeeting(models.Model):
         """
         verbose_name = "Echange séance"
 
+
 class ListExchangeMeeting(models.Model):
     """
-    This class to load the  meetings of a customuser we want to exchange a meeting
+    This class to load the  meetings of a customuser
+    we want to exchange a meeting
     """
-    exchange_meeting = models.ForeignKey(ExchangeMeeting, on_delete=models.CASCADE)
-    date_meeting1 = models.ForeignKey(CalendarMeeting, related_name='date2_meeting1', blank=True, on_delete=models.CASCADE)
-    date_meeting2 = models.ForeignKey(CalendarMeeting, related_name='date2_meeting2', blank=True, on_delete=models.CASCADE)
-    date_meeting3 = models.ForeignKey(CalendarMeeting, related_name='date2_meeting3', blank=True, on_delete=models.CASCADE)
-    groupe = models.ForeignKey(Meeting,on_delete=models.CASCADE, null=True)
-    
+    exchange_meeting = models.ForeignKey(ExchangeMeeting,
+                                         on_delete=models.CASCADE
+                                         )
+    date_meeting1 = models.ForeignKey(CalendarMeeting,
+                                      related_name='date2_meeting1',
+                                      blank=True,
+                                      on_delete=models.CASCADE
+                                      )
+    date_meeting2 = models.ForeignKey(CalendarMeeting,
+                                      related_name='date2_meeting2',
+                                      blank=True, null=True,
+                                      on_delete=models.CASCADE
+                                      )
+    date_meeting3 = models.ForeignKey(CalendarMeeting,
+                                      related_name='date2_meeting3',
+                                      blank=True,
+                                      null=True,
+                                      on_delete=models.CASCADE
+                                      )
+    groupe = models.ForeignKey(Meeting,
+                               on_delete=models.CASCADE,
+                               null=True
+                               )
 
     class Meta:
         """

@@ -7,40 +7,75 @@
             {% csrf_token %}
                 
                 <div class="row form-inline">
-                    <div class="col-lg-8 ">
-                        <h3 class="text text-white font-weight-bold">(Mme/M.)  {{form.auth_user}} aimerait échanger sa séance du</h3> 
-                        <label for="{{ form.call_meeting.id_for_label }}"></label>
+                    <div class="col-lg-12 ">
+                        <hr class="divider my-4" />
+                        <h4 class="text text-white font-weight-bold">(Mme/M.) {{form.auth_user}} </h4> 
+                        </br>
                     </div>
-                    <div class="col-lg-4 ">
-                        {{form.call_meeting}}
-                        
-                    </div>
-                   
                 </div>
-                <div class="row form-inline">
-                    <div class="col-lg-9 align-self-end">
-                        <h3 class="text text-white font-weight-bold"> avec le groupe du  </h3>
-                        <label for="{{ form.groupe.id_for_label }}"></label>
-                     </div>
-                    <div class="col-lg-3 ">
-                        {{form.groupe }}
+                <div class="row form-inline ">
+                    <div class="col-lg-6 ">
+                        <h4 class="text text-white font-weight-bold align-self-baseline"> aimerait échanger sa séance du</h4> 
                     </div>
-                    
-                <div class="row form-inline align-self-end">
-                    
-                    <h3 class="text text-white font-weight-bold">Je suis libre le </h3>
-                    <label for="{{ form.free_date.id_for_label }}"></label></h3>
-                    {{ form.free_date1 }}
-                    <h3 class="text text-white font-weight-bold">ou le  </h3>
-                    {{ form.free_date2 }}
-                    <h3 class="text text-white font-weight-bold">ou le  </h3>
-                    {{ form.free_date3 }}
-                    <hr class="divider my-4" />
-                    
+                    <div class="col-lg-6 ">
+                        {{form.call_meeting}}
+                        </br>
+                        </br>
+                    </div>
+                </div>   
+                <div class="row form-inline">
+                    <div class="col-lg-6 ">
+                        <h3 class="text text-white font-weight-bold"> avec le groupe du  </h3>
+                        
+                     </div>
+                    <div class="col-lg-6 ">
+                        {{form.groupe }}
+                        </br>
+                        </br>
+                    </div>
+                </div> 
+                <div class="row form-inline ">
+                    <div class="col-lg-6 ">
+                        <h3 class="text text-white font-weight-bold">Je suis libre le </h3>
+                    </div>
+                    <div class="col-lg-6 ">
+                        {{ form.free_date1 }}
+                        </br>
+                    </div>
+                </div>
+                <div class="row form-inline ">
+                    <div class="col-lg-6 ">
+                        <h3 class="text text-white font-weight-bold">ou le  </h3>
+                    </div>
+                    <div class="col-lg-6 ">
+                        {{ form.free_date2 }}
+                        </br>
+                    </div>
+                </div>
+                <div class="row form-inline ">
+                    <div class="col-lg-6 ">
+                        <h3 class="text text-white font-weight-bold">ou le  </h3>
+                    </div>
+                    <div class="col-lg-6 ">
+                        {{ form.free_date3 }}
+                        </br>
+                    </div>
                 </div> 
                     
-                <button type="submit" class=" btn btn-success " value="Chercher">Envoyer Demande</button>
-              
-                
+                <button type="submit" class=" btn btn-success float-right" value="Chercher">Envoyer Demande</button>
+                </br>
+                <hr class="divider my-4" />
+                {% if form.errors %}
+                    <h4 class="text text-warning font-weight-bold">Erreur sur ce formulaire</h4> 
+                    {% for field in form %}
+                        {% if field.errors%}
+                            <div class="fieldWrapper">
+                                <h4 class="text text-white font-weight-bold">{{ field.label_tag }} {{ field.errors }} </h4>
+                            </div>
+                        {% endif%}
+                    {%endfor%}
+                    <h4 class="text text-warning font-weight-bold"> Veuillez réessayer</h4> 
+                    <hr class="divider my-4" />
+                {% endif %}
         </form>
 
