@@ -136,6 +136,7 @@ tbd_project/settings/production.py
 
 # File users
 customuser.json
+calendarcustomuser.json
 
 # command to  verify the  datas
 members/management/commands/control_data_customuser.py
