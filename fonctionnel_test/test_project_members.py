@@ -22,7 +22,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         cls.selenium = webdriver.Firefox()
         cls.selenium.implicitly_wait(10)
 
-        all_values_customuser = read_json("customuser.json")
+        all_values_customuser = read_json("customuser_demo.json")
         for val in all_values_customuser:
             # We fill the data base customuser
             CustomUser.objects.create(
@@ -32,7 +32,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
                 )
 
         # we create a user connect
-        cls.user = CustomUser.objects.get(email='houche.serge@orange.fr')
+        cls.user = CustomUser.objects.get(email='houche@orange.fr')
         all_values = read_json("calendar.json")
         for date in all_values:
             # We fill the data base members.calendarmetting
@@ -66,7 +66,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         self.assertIn("Se connecter", self.selenium.title)
         time.sleep(2)
         username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys('houche.serge@orange.fr')
+        username_input.send_keys('houche@orange.fr')
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys('felixt12')
 
@@ -131,7 +131,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
             )
         time.sleep(3)
         username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys('houche.serge@gmail.com')
+        username_input.send_keys('houche@gmail.com')
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys('felixt25')
         time.sleep(3)
