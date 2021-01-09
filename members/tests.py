@@ -31,7 +31,7 @@ class AccueilMemberViewTestCase(TestCase):
                 )
         self.day_list = list(CalendarMeeting.objects.all().order_by('date'))
         self.calendar = calendar(self.day_list)
-        all_values_calendar_user = read_json("calendarcustomuser.json")
+        all_values_calendar_user = read_json("calendarcustomuser_demo.json")
         for date in all_values_calendar_user:
             auth_user = CustomUser.objects.get(pk=date["fields"]["auth_user"])
             date_meeting = CalendarMeeting.objects.get(
