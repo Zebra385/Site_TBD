@@ -114,7 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 PASSWORD_HASHERS = [
+
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -155,4 +157,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'houche.zebra385@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 
-FIXTURE_DIRS: ['/fixtures']
+
