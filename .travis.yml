@@ -10,10 +10,7 @@ before_install:
   - python -m pip install --upgrade pip
 
 install:
-  - pip install  -r requirements.txt --use-feature=2020-resolver
-
-before_script:
-  - pip3 install -r requirements.txt
+  - pip3 install  -r requirements.txt --use-feature=2020-resolver
 
 
 services:
@@ -27,8 +24,8 @@ before_script:
   - sudo mv geckodriver /usr/local/bin
   - 'export DISPLAY=:99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
-  - sleep 3
-  
+  - sleep 4
+
 script:
   - python3 manage.py test
 
