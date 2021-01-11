@@ -20,8 +20,7 @@ env: DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
 
 
 script:
-  - xvfb-run --server-args="-screen 0 1024x768x24" make test
-  - python3 manage.py test
+    - python3 manage.py test
 
 
 # safelist
