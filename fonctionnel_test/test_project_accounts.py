@@ -8,7 +8,11 @@ from django.core import mail
 from django.utils.http import urlsafe_base64_encode
 from django.utils.encoding import force_bytes
 from django.contrib.auth.tokens import default_token_generator
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from accounts.models import CustomUser
+
 
 
 class Registration(StaticLiveServerTestCase):
@@ -32,11 +36,9 @@ class Registration(StaticLiveServerTestCase):
         """
         Test to know if we can register a new member
         """
-        # we logout 
-        self.selenium.get(
-            '%s%s' % (self.live_server_url, '/accounts/logout/')
-            )
+       
         # We open the page in localhost server to reset our password
+        wait = WebDriverWait(self.selenium, 10)   
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/register/')
             )
@@ -55,6 +57,7 @@ class Registration(StaticLiveServerTestCase):
         password2_input = self.selenium.find_element_by_name("password2")
         password2_input.send_keys('Marmote§')
         # time.sleep(3)
+        wait.until(EC.element_to_be_clickable((By.XPATH,'//input[@type="submit"]')))
         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
         # time.sleep(3)
         self.selenium.get(

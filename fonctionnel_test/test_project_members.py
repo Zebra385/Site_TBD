@@ -4,6 +4,9 @@ from accounts.models import CustomUser
 from members.models import CalendarMeeting, Meeting
 import time
 from members.create_calendar import calendar, read_json
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 
 
 class TestCallExchangeMeeting(StaticLiveServerTestCase):
@@ -37,11 +40,9 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         super().tearDownClass()
 
     def test_call_exchange_selenium(self):
-        # we logout 
-        self.selenium.get(
-            '%s%s' % (self.live_server_url, '/accounts/logout/')
-            )
-        # We open the page in localhost server to login        
+        
+        # We open the page in localhost server to login   
+        wait = WebDriverWait(self.selenium, 10)     
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/')
             )
@@ -53,15 +54,17 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
                                    ))
         self.assertIn("Se connecter", self.selenium.title)
         # time.sleep(2)
+        
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys('houche@orange.fr')
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys('felixt12')
-
-        # time.sleep(2)
+        
+        wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         # time.sleep(2)
         # we go in the page registerCall to call an exchangemeeting
+        wait = WebDriverWait(self.selenium, 10) 
         self.selenium.get(
                     '%s%s' % (self.live_server_url, '/members/RegisterCall/'))
         # time.sleep(2)
@@ -107,7 +110,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         free_date3_1_input.send_keys(0)
         free_date3_2_input = self.selenium.find_element_by_name("free_date3_2")
         free_date3_2_input.send_keys(2021)
-        # time.sleep(2)
+        wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         # time.sleep(2)
         # we logout to test the caledarexchangemeeting
@@ -116,6 +119,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
             )
         # time.sleep(3)
         # We open a new page  in localhost server to login
+        wait = WebDriverWait(self.selenium, 10) 
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/')
             )
@@ -124,10 +128,11 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         username_input.send_keys('houche@gmail.com')
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys('felixt25')
-        # time.sleep(3)
+        wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         # time.sleep(3)
         # We go to the page CalendarexchangeMeeting to accept an exchange
+        wait = WebDriverWait(self.selenium, 10) 
         self.selenium.get('%s%s' % (self.live_server_url,
                                     '/members/CalendarExchangeMeeting/'))
         page_url = self.selenium.current_url
@@ -136,7 +141,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
             (self.live_server_url, '/members/CalendarExchangeMeeting/'))
         self.assertIn("les demandes d'échanges de séances en cours",
                       self.selenium.title)
-        # time.sleep(5)
+        wait.until(EC.element_to_be_clickable((By.XPATH,'//input[@type="checkbox"][@value="1"]')))
         self.selenium.find_element_by_xpath(
             '//input[@type="checkbox"][@value="1"]'
             ).click()
