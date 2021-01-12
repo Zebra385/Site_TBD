@@ -145,7 +145,7 @@ INTERNAL_IPS = ['127.0.0.1']
 TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'template')]
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/'
+LOGIN_REDIRECT_URL = '/members/PageMember'
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
