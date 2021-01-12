@@ -114,7 +114,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 PASSWORD_HASHERS = [
+
     'django.contrib.auth.hashers.PBKDF2PasswordHasher',
+    'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
     'django.contrib.auth.hashers.PBKDF2SHA1PasswordHasher',
     'django.contrib.auth.hashers.Argon2PasswordHasher',
     'django.contrib.auth.hashers.BCryptSHA256PasswordHasher',
@@ -143,7 +145,7 @@ INTERNAL_IPS = ['127.0.0.1']
 TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'template')]
 
 LOGIN_URL = '/accounts/login/'
-LOGIN_REDIRECT_URL = '/members/PageMember'
+LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
@@ -155,4 +157,4 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'houche.zebra385@gmail.com'
 EMAIL_HOST_PASSWORD = ''
 
-FIXTURE_DIRS: ['/fixtures']
+

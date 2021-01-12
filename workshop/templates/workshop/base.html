@@ -34,10 +34,10 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:stages' %}">Les stages</a></li>
                         {% comment %} <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galerie</a></li> {% endcomment %}
                         {% if user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:logout' %}"/a>Se déconnecter</a></li>
-                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'members:pagemember' %}"/a>Ma page</a></li>
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:logout' %}">Se déconnecter</a></li>
+                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'members:pagemember' %}" id="mapage">Ma page</a></li>
                         {% else %}
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:login' %}" title="Réserver aux adhérents"/a>Se connecter</a></li>                        
+                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:login' %}" title="Réserver aux adhérents">Se connecter</a></li>                        
                         {% endif%} 
                     </ul>
                 </div>

@@ -24,8 +24,25 @@ class RegistrationTestcase(TestCase):
         self.assertEqual(form.email, 'jacob@orange.fr')
 
 
-# class MyloginTestcase(TestCase):
-#     def test_reset_password(self):
-#         self.client.login()
-#         response = self.client.post(reverse('accounts:reset_password'))
-#         self.assertEqual(response.status_code, 200)
+class MyloginTestcase(TestCase):
+    def test_reset_password(self):
+        self.client.login()
+        response = self.client.post(reverse('accounts:reset_password'))
+        self.assertEqual(response.status_code, 200)
+
+
+class EmailBackendTestcase(TestCase):
+    def test_authenticate(self):
+        self.user = CustomUser.objects.create_user(
+            username='jacob',
+            email='jacob@orange.fr',
+            password='top_secret')
+        # try login by name
+        response = self.client.login(username='jacob', password='top_secret')
+        self.assertEqual(response, True)
+
+        # try login by email
+        response = self.client.login(
+            username='jacob@orange.fr',
+            password='top_secret')
+        self.assertEqual(response, True)
