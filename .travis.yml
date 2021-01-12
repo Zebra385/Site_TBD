@@ -1,3 +1,4 @@
+sudo: required
 arch: amd64 
 os: linux
 dist: bionic
