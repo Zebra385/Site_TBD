@@ -24,7 +24,7 @@ install:
 
 before_script:
   -./fonctionnel_test/scripts/setup_chromedriver.sh 
-  - 'export PATH = "$ {HOME} / chromedriver: $ {PATH}" '
+  - "export PATH = "$ {HOME} / chromedriver: $ {PATH}" ""
   - chromedriver --version 
   - 'export DISPLAY=:99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
