@@ -11,50 +11,50 @@ from django.contrib.auth.tokens import default_token_generator
 from accounts.models import CustomUser
 
 
-class Registration(StaticLiveServerTestCase):
-    """
-    Test fonctionnal to test if the new user cans be create
-    """
-    @classmethod
-    def setUpClass(cls):
-        # it is to declare what we need in this test
-        super().setUpClass()
-        cls.selenium = webdriver.Firefox()
-        cls.selenium.implicitly_wait(10)
+# class Registration(StaticLiveServerTestCase):
+#     """
+#     Test fonctionnal to test if the new user cans be create
+#     """
+#     @classmethod
+#     def setUpClass(cls):
+#         # it is to declare what we need in this test
+#         super().setUpClass()
+#         cls.selenium = webdriver.Firefox()
+#         cls.selenium.implicitly_wait(10)
 
-    @classmethod
-    def tearDownClass(cls):
-        # to find the test , we quit the webdriver
-        cls.selenium.quit()
-        super().tearDownClass()
+#     @classmethod
+#     def tearDownClass(cls):
+#         # to find the test , we quit the webdriver
+#         cls.selenium.quit()
+#         super().tearDownClass()
 
-    def test_register_selenium(self):
-        """
-        Test to know if we can register a new member
-        """
-        # We open the page in localhost server to reset our password
-        self.selenium.get(
-            '%s%s' % (self.live_server_url, '/accounts/register/')
-            )
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/accounts/register/'
-                                   ))
-        time.sleep(3)
-        username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys('jacob')
-        email_input = self.selenium.find_element_by_name("email")
-        email_input.send_keys('jacob@orange.fr')
-        password1_input = self.selenium.find_element_by_name("password1")
-        password1_input.send_keys('Marmote§')
-        password2_input = self.selenium.find_element_by_name("password2")
-        password2_input.send_keys('Marmote§')
-        time.sleep(3)
-        self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
-        time.sleep(3)
-        self.selenium.get(
-                    '%s%s' % (self.live_server_url, '/members/RegisterCall/'))
+#     def test_register_selenium(self):
+#         """
+#         Test to know if we can register a new member
+#         """
+#         # We open the page in localhost server to reset our password
+#         self.selenium.get(
+#             '%s%s' % (self.live_server_url, '/accounts/register/')
+#             )
+#         page_url = self.selenium.current_url
+#         self.assertEqual(page_url,
+#                          '%s%s' % (self.live_server_url,
+#                                    '/accounts/register/'
+#                                    ))
+#         time.sleep(3)
+#         username_input = self.selenium.find_element_by_name("username")
+#         username_input.send_keys('jacob')
+#         email_input = self.selenium.find_element_by_name("email")
+#         email_input.send_keys('jacob@orange.fr')
+#         password1_input = self.selenium.find_element_by_name("password1")
+#         password1_input.send_keys('Marmote§')
+#         password2_input = self.selenium.find_element_by_name("password2")
+#         password2_input.send_keys('Marmote§')
+#         time.sleep(3)
+#         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
+#         time.sleep(3)
+#         self.selenium.get(
+#                     '%s%s' % (self.live_server_url, '/members/RegisterCall/'))
 
 
 class TestResetPassword(StaticLiveServerTestCase):
