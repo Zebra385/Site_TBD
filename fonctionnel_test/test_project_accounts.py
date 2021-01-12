@@ -31,11 +31,6 @@ class Registration(StaticLiveServerTestCase):
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/register/')
             )
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/accounts/register/'
-                                   ))
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys('jacob')
         email_input = self.selenium.find_element_by_name("email")
