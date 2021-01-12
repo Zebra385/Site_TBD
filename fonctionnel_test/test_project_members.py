@@ -9,73 +9,73 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-class TestCallExchangeMeeting(StaticLiveServerTestCase):
-    """
-    Test fonctionnal to test if the user cans call an exchange meeting
-    First login first user
-    Go to the page to  create an exchange meeting
-    Logout
-    Second login second user
-    Go to the page to accept the previous exchange meeting
-    """
-    fixtures = [
-        'calendarmeeting_demo.json',
-        'meeting_demo.json',
-        'gang_demo.json',
-        'customuser_demo.json',
-        'calendarcustomuser_demo.json'
-        ]
+# class TestCallExchangeMeeting(StaticLiveServerTestCase):
+#     """
+#     Test fonctionnal to test if the user cans call an exchange meeting
+#     First login first user
+#     Go to the page to  create an exchange meeting
+#     Logout
+#     Second login second user
+#     Go to the page to accept the previous exchange meeting
+#     """
+#     fixtures = [
+#         'calendarmeeting_demo.json',
+#         'meeting_demo.json',
+#         'gang_demo.json',
+#         'customuser_demo.json',
+#         'calendarcustomuser_demo.json'
+#         ]
 
-    @classmethod
-    def setUpClass(cls):
-        # it is to declare what we need in this test
-        super().setUpClass()
-        cls.selenium = webdriver.Chrome()
-        cls.selenium.implicitly_wait(10)
+#     @classmethod
+#     def setUpClass(cls):
+#         # it is to declare what we need in this test
+#         super().setUpClass()
+#         cls.selenium = webdriver.Chrome()
+#         cls.selenium.implicitly_wait(10)
        
-    @classmethod
-    def tearDownClass(cls):
-        # to find the test , we quit the webdriver
-        cls.selenium.quit()
-        super().tearDownClass()
+#     @classmethod
+#     def tearDownClass(cls):
+#         # to find the test , we quit the webdriver
+#         cls.selenium.quit()
+#         super().tearDownClass()
 
-    def test_call_exchange_selenium(self):
-        self.selenium.get(
-            '%s%s' % (self.live_server_url, '/')
-            )
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/'
-                                   ))
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/'
-                                   ))
-        self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title) 
-        # We open the page in localhost server to login   
-        wait = WebDriverWait(self.selenium, 20)     
-        self.selenium.get(
-            '%s%s' % (self.live_server_url, '/accounts/login/')
-            )
-        # time.sleep(2)
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/accounts/login/'
-                                   ))
-        self.assertIn("Se connecter", self.selenium.title)
-        # time.sleep(2)
+#     def test_call_exchange_selenium(self):
+#         self.selenium.get(
+#             '%s%s' % (self.live_server_url, '/')
+#             )
+#         page_url = self.selenium.current_url
+#         self.assertEqual(page_url,
+#                          '%s%s' % (self.live_server_url,
+#                                    '/'
+#                                    ))
+#         page_url = self.selenium.current_url
+#         self.assertEqual(page_url,
+#                          '%s%s' % (self.live_server_url,
+#                                    '/'
+#                                    ))
+#         self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title) 
+#         # We open the page in localhost server to login   
+#         wait = WebDriverWait(self.selenium, 20)     
+#         self.selenium.get(
+#             '%s%s' % (self.live_server_url, '/accounts/login/')
+#             )
+#         # time.sleep(2)
+#         page_url = self.selenium.current_url
+#         self.assertEqual(page_url,
+#                          '%s%s' % (self.live_server_url,
+#                                    '/accounts/login/'
+#                                    ))
+#         self.assertIn("Se connecter", self.selenium.title)
+#         # time.sleep(2)
         
-        username_input = self.selenium.find_element_by_name("username")
-        username_input.send_keys('houche@orange.fr')
-        password_input = self.selenium.find_element_by_name("password")
-        password_input.send_keys('felixt12')
+#         username_input = self.selenium.find_element_by_name("username")
+#         username_input.send_keys('houche@orange.fr')
+#         password_input = self.selenium.find_element_by_name("password")
+#         password_input.send_keys('felixt12')
         
-        wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
-        self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
-        time.sleep(5)
+#         wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
+#         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
+#         time.sleep(5)
         # wait.until(EC.element_to_be_clickable((By.XPATH,'//a[@id="mapage"]')))
 
 
