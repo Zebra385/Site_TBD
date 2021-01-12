@@ -36,7 +36,20 @@ class Registration(StaticLiveServerTestCase):
         """
         Test to know if we can register a new member
         """
-       
+        self.selenium.get(
+            '%s%s' % (self.live_server_url, '/')
+            )
+        page_url = self.selenium.current_url
+        self.assertEqual(page_url,
+                         '%s%s' % (self.live_server_url,
+                                   '/'
+                                   ))
+        page_url = self.selenium.current_url
+        self.assertEqual(page_url,
+                         '%s%s' % (self.live_server_url,
+                                   '/'
+                                   ))
+        self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title)                           
         # We open the page in localhost server to reset our password
         wait = WebDriverWait(self.selenium, 10)   
         self.selenium.get(
