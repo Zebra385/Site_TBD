@@ -15,21 +15,42 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
     Second login second user
     Go to the page to accept the previous exchange meeting
     """
-    fixtures = [
-        'calendarmeeting_demo.json',
-        'meeting_demo.json',
-        'gang_demo.json',
-        'customuser_demo.json',
-        'calendarcustomuser_demo.json'
-        ]
-
     @classmethod
     def setUpClass(cls):
         # it is to declare what we need in this test
         super().setUpClass()
         cls.selenium = webdriver.Firefox()
         cls.selenium.implicitly_wait(10)
-       
+
+        all_values_customuser = read_json("customuser_demo.json")
+        for val in all_values_customuser:
+            # We fill the data base customuser
+            CustomUser.objects.create(
+                password=val["fields"]["password"],
+                username=val["fields"]["username"],
+                email=val["fields"]["email"],
+                )
+
+        # we create a user connect
+        cls.user = CustomUser.objects.get(email='houche@orange.fr')
+        all_values = read_json("calendar.json")
+        for date in all_values:
+            # We fill the data base members.calendarmetting
+            CalendarMeeting.objects.create(
+                date=date,
+                )
+
+        cls.day_list = list(CalendarMeeting.objects.all().order_by('date'))
+        cls.calendar = calendar(cls.day_list)
+        cls.all_values_calendar_user = read_json("calendarcustomuser_demo.json")
+        # we create a group for an exchange
+        Meeting.objects.create(
+                day="Mercredi",
+                time_slot="19h30-22h00",
+                time=2.5,
+                )
+        cls.groupe = Meeting.objects.get(day="Mercredi")
+
     @classmethod
     def tearDownClass(cls):
         # to find the test , we quit the webdriver
@@ -38,7 +59,6 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
 
     def test_call_exchange_selenium(self):
         # We open the page in localhost server to login
-        
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/')
             )
@@ -73,7 +93,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         call_meeting_2_input = self.selenium.find_element_by_name(
             "call_meeting_2")
         call_meeting_2_input.send_keys(2021)
-        self.groupe = Meeting.objects.get(day="Mercredi")
+
         groupe_input = self.selenium.find_element_by_name("groupe")
         groupe_input.send_keys(str(self.groupe))
 
