@@ -30,7 +30,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
     def setUpClass(cls):
         # it is to declare what we need in this test
         super().setUpClass()
-        cls.selenium = webdriver.Firefox()
+        cls.selenium = webdriver.Chrome()
         cls.selenium.implicitly_wait(10)
        
     @classmethod
