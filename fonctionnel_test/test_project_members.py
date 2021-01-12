@@ -40,20 +40,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         super().tearDownClass()
 
     def test_call_exchange_selenium(self):
-        self.selenium.get(
-            '%s%s' % (self.live_server_url, '/')
-            )
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/'
-                                   ))
-        page_url = self.selenium.current_url
-        self.assertEqual(page_url,
-                         '%s%s' % (self.live_server_url,
-                                   '/'
-                                   ))
-        self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title) 
+        
         # We open the page in localhost server to login   
         wait = WebDriverWait(self.selenium, 10)     
         self.selenium.get(
@@ -85,7 +72,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
 
         self.assertEqual(page_url,
                          '%s%s' % (self.live_server_url,
-                                   '/embers/RegisterCall/'
+                                   '/members/RegisterCall/'
                                    ))
         # self.assertIn("Demande d'échange de séance", self.selenium.title)
         # time.sleep(2)
