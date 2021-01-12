@@ -65,6 +65,7 @@ class ExchangeMeetingForm(forms.Form):
         calendar = []
         calendar_all = CalendarMeeting.objects.all().order_by('date')
         for day in calendar_all:
+            print('date vaut :', day.date)
             calendar.append(day.date)
         # calendar = list(calendar.date)
         # print('le calendar est : ', calendar)
