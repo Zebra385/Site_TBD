@@ -9,12 +9,14 @@ python:
   - '3.6'
 env:
   - DJANGO_VERSION=3.1
-  - DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
 
 install:
   - pip3 install -r requirements.txt
 
 
+
+
+env: DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
 before_script:
   - psql -c 'create database travis_ci_test;' -U postgres
   - wget "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-linux64.tar.gz"
