@@ -80,7 +80,7 @@ class CallExchangeMeeting(View):
             call_meeting = CalendarMeeting.objects.get(date=call_meeting)
             # auth_user = form.cleaned_data['auth_user']
             auth_user = CustomUser.objects.get(username=auth_user)
-            print("l'utilisateur est :",auth_user)
+            # print("l'utilisateur est :",auth_user)
             groupe_all = form.cleaned_data['groupe']
             groupe = str(groupe_all)
             groupe = groupe.split("-")
@@ -106,7 +106,7 @@ class CallExchangeMeeting(View):
                 caller=auth_user,
                 caller_meeting=call_meeting
             )
-            print('exchange_meeting vaut', exchange_meeting[0].id)
+            # print('exchange_meeting vaut', exchange_meeting[0].id)
             exchange_meeting_id = ExchangeMeeting.objects.get(
                 pk=exchange_meeting[0].id
                 )
