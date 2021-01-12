@@ -37,8 +37,11 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         super().tearDownClass()
 
     def test_call_exchange_selenium(self):
-        # We open the page in localhost server to login
-        
+        # we logout 
+        self.selenium.get(
+            '%s%s' % (self.live_server_url, '/accounts/logout/')
+            )
+        # We open the page in localhost server to login        
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/')
             )

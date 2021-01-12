@@ -32,6 +32,10 @@ class Registration(StaticLiveServerTestCase):
         """
         Test to know if we can register a new member
         """
+        # we logout 
+        self.selenium.get(
+            '%s%s' % (self.live_server_url, '/accounts/logout/')
+            )
         # We open the page in localhost server to reset our password
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/register/')
