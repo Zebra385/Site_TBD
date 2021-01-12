@@ -1,3 +1,4 @@
+sudo: required
 arch: amd64 
 os: linux
 dist: bionic
@@ -10,7 +11,9 @@ python:
 env:
   - DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
 
+
 addons:
+  chrome: stable
   apt:
     packages:
       - postgresql-server-dev-9.6
@@ -20,9 +23,9 @@ install:
 
 
 before_script:
-  - wget http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip
-  - unzip chromedriver_linux64.zip -d /home/travis/virtualenv/python3.6/
-  - sudo mv chromedriver /usr/local/bin
+  -./fonctionnel_test/scripts/setup_chromedriver.sh 
+  - "export PATH = "$ {HOME} / chromedriver: $ {PATH}" ""
+  - chromedriver --version 
   - 'export DISPLAY=:99.0'
   - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
   - sleep 3
