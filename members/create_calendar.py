@@ -1,22 +1,7 @@
 from datetime import date
 import datetime
 import locale
-import json 
 
-
-def read_json(file):
-    # create a list
-    values = []
-    # open a json file with my objects
-    with open(file) as f:
-        # load all the data contained in this file f
-        data = json.load(f)
-    # Create a new empty list
-    for entry in data:
-        # add each item in my list
-        values.append(entry)
-    # return my completed list
-    return values
 
 def calendar(calendar_list):
     """
