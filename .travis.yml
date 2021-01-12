@@ -1,17 +1,7 @@
 language: python
 python:
-  - '3.6'
+  - '3.6.9'
 
-os: linux
-linux:
-  - '16.04'
-
-before_install:
-  - python -m pip install --upgrade pip
-
-install:
-  - pip install --user -r requirements.txt --use-feature=2020-resolver
-  
 before_script:
   - pip3 install -r requirements.txt
 
@@ -21,6 +11,13 @@ services:
 
 env: DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
 
+before_script:
+  - wget "https://github.com/mozilla/geckodriver/releases/download/v0.24.0/geckodriver-v0.24.0-linux64.tar.gz"
+  - tar xfz geckodriver-v0.24.0-linux64.tar.gz
+  - sudo mv geckodriver /usr/local/bin
+  - 'export DISPLAY=:99.0'
+  - Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - sleep 3
 
 script:
   - python3 manage.py test
