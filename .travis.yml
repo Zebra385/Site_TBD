@@ -8,13 +8,8 @@ language: python
 python:
   - '3.6'
 env:
+  - DJANGO_VERSION=3.1
   - DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
-
-addons:
-  postgresql: '10.15'
-  apt:
-    packages:
-      - postgresql-server-dev-10.15
 
 install:
   - pip3 install -r requirements.txt
