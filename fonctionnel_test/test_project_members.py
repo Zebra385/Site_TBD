@@ -42,7 +42,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
 
         cls.day_list = list(CalendarMeeting.objects.all().order_by('date'))
         cls.calendar = calendar(cls.day_list)
-        cls.all_values_calendar_user = read_json("calendarcustomuser_demo.json")
+        cls.all_values_calendar_user = read_json("calendarcustomuser.json")
         # we create a group for an exchange
         Meeting.objects.create(
                 day="Mercredi",
