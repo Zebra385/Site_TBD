@@ -23,7 +23,7 @@ from accounts.models import CustomUser
 #     def setUpClass(cls):
 #         # it is to declare what we need in this test
 #         super().setUpClass()
-#         cls.selenium = webdriver.chrome()
+#         cls.selenium = webdriver.Firefox()
 #         cls.selenium.implicitly_wait(10)
 
 #     @classmethod
@@ -86,7 +86,7 @@ class TestResetPassword(StaticLiveServerTestCase):
     def setUpClass(cls):
         # it is to declare what we need in this test
         super().setUpClass()
-        cls.selenium = webdriver.Chrome()
+        cls.selenium = webdriver.Firefox()
         cls.selenium.implicitly_wait(10)
         cls.user = CustomUser(
                     username='jacob',
