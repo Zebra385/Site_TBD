@@ -4,14 +4,14 @@ python:
 
 os: linux
 linux:
-  - '18.04'
+  - '16.04'
 
 before_install:
   - python -m pip install --upgrade pip
 
 install:
-  - pip install  -r requirements.txt --use-feature=2020-resolver
-
+  - pip install --user -r requirements.txt --use-feature=2020-resolver
+  
 before_script:
   - pip3 install -r requirements.txt
 
