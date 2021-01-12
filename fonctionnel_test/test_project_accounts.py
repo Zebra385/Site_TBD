@@ -47,7 +47,7 @@ class Registration(StaticLiveServerTestCase):
                          '%s%s' % (self.live_server_url,
                                    '/accounts/register/'
                                    ))
-        wait.until(EC.presence_of_element_located((By.NAME,'username')))
+        # time.sleep(3)
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys('jacob')
         email_input = self.selenium.find_element_by_name("email")

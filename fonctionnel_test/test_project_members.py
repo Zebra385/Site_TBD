@@ -77,7 +77,6 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         # self.assertIn("Demande d'échange de séance", self.selenium.title)
         # time.sleep(2)
         # we fill the form
-        wait.until(EC.presence_of_element_located((By.NAME,'call_meeting_0')))
         call_meeting_0_input = self.selenium.find_element_by_name(
             "call_meeting_0")
         call_meeting_0_input.send_keys(5)
