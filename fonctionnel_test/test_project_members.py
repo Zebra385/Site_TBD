@@ -55,7 +55,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
                                    ))
         self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title) 
         # We open the page in localhost server to login   
-        wait = WebDriverWait(self.selenium, 10)     
+        wait = WebDriverWait(self.selenium, 20)     
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/')
             )
@@ -76,14 +76,15 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         time.sleep(5)
+        wait.until(EC.element_to_be_clickable((By.XPATH,'//a[@id="mapage"]')))
 
 
-        # time.sleep(2)
+        time.sleep(3)
         # we go in the page registerCall to call an exchangemeeting
-        wait = WebDriverWait(self.selenium, 10) 
+        wait = WebDriverWait(self.selenium, 20) 
         self.selenium.get(
                     '%s%s' % (self.live_server_url, '/members/PageMember/'))
-        time.sleep(3)
+        
         page_url = self.selenium.current_url
 
         self.assertEqual(page_url,
@@ -92,7 +93,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
                                    ))
         self.assertIn("Adhérents de l'association", self.selenium.title)
         call_ici=self.selenium.find_element_by_xpath('//h3[@id="ici"]').click()
-        time.sleep(5)
+        
         # we fill the form
         wait.until(EC.presence_of_element_located((By.NAME,'call_meeting_0')))
         call_meeting_0_input = self.selenium.find_element_by_name(
