@@ -41,7 +41,7 @@ class Registration(StaticLiveServerTestCase):
                          '%s%s' % (self.live_server_url,
                                    '/accounts/register/'
                                    ))
-        time.sleep(3)
+        # time.sleep(3)
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys('jacob')
         email_input = self.selenium.find_element_by_name("email")
@@ -50,9 +50,9 @@ class Registration(StaticLiveServerTestCase):
         password1_input.send_keys('Marmote§')
         password2_input = self.selenium.find_element_by_name("password2")
         password2_input.send_keys('Marmote§')
-        time.sleep(3)
+        # time.sleep(3)
         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
-        time.sleep(3)
+        # time.sleep(3)
         self.selenium.get(
                     '%s%s' % (self.live_server_url, '/members/RegisterCall/'))
 
@@ -92,7 +92,7 @@ class TestResetPassword(StaticLiveServerTestCase):
             'jacob@orange.fr', ['to@example.com'],
             fail_silently=False,
         )
-        time.sleep(2)
+        # time.sleep(2)
         # Test that one message has been sent.
         self.assertEqual(len(mail.outbox), 1)
 
@@ -112,7 +112,7 @@ class TestResetPassword(StaticLiveServerTestCase):
         email_input = self.selenium.find_element_by_name("email")
         email_input.send_keys('jacob@orange.fr')
         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
-        time.sleep(2)
+        # time.sleep(2)
 
         # when we have receve a message, we click on a link
         # to can enter a new spassword
@@ -131,4 +131,4 @@ class TestResetPassword(StaticLiveServerTestCase):
         password1_input.send_keys('elephant!')
         password2_input.send_keys('elephant!')
         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
-        time.sleep(2)
+        # time.sleep(2)
