@@ -6,8 +6,11 @@ python:
 os: linux
 
 
+before_install:
+  - python -m pip install --upgrade pip
+
 install:
-  - pip3 install -r requirements.txt
+  - pip3 install  -r requirements.txt --use-feature=2020-resolver
 
 
 services:
