@@ -1,90 +1,108 @@
 from selenium import webdriver
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
-from accounts.models import CustomUser
-from members.models import CalendarMeeting, Meeting
-import time
-from members.create_calendar import calendar, read_json
+from django.core import mail
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 
 
-# class TestCallExchangeMeeting(StaticLiveServerTestCase):
-#     """
-#     Test fonctionnal to test if the user cans call an exchange meeting
-#     First login first user
-#     Go to the page to  create an exchange meeting
-#     Logout
-#     Second login second user
-#     Go to the page to accept the previous exchange meeting
-#     """
-#     fixtures = [
-#         'calendarmeeting_demo.json',
-#         'meeting_demo.json',
-#         'gang_demo.json',
-#         'customuser_demo.json',
-#         'calendarcustomuser_demo.json'
-#         ]
+class TestCallExchangeMeeting(StaticLiveServerTestCase):
+    """
+    Test fonctionnal to test if the user cans call an exchange meeting
+    First login first user
+    Go to the page to  create an exchange meeting
+    Logout
+    Second login second user
+    Go to the page to accept the previous exchange meeting
+    """
+    fixtures = [
+        'calendarmeeting_demo.json',
+        'meeting_demo.json',
+        'gang_demo.json',
+        'customuser_demo.json',
+        'calendarcustomuser_demo.json'
+        ]
 
-#     @classmethod
-#     def setUpClass(cls):
-#         # it is to declare what we need in this test
-#         super().setUpClass()
-#         cls.selenium = webdriver.Chrome()
-#         cls.selenium.implicitly_wait(10)
-       
-#     @classmethod
-#     def tearDownClass(cls):
-#         # to find the test , we quit the webdriver
-#         cls.selenium.quit()
-#         super().tearDownClass()
+    @classmethod
+    def setUpClass(cls):
+        # it is to declare what we need in this test
+        super().setUpClass()
+        cls.selenium = webdriver.Firefox()
+        cls.selenium.implicitly_wait(10)
 
-#     def test_call_exchange_selenium(self):
-#         self.selenium.get(
-#             '%s%s' % (self.live_server_url, '/')
-#             )
-#         page_url = self.selenium.current_url
-#         self.assertEqual(page_url,
-#                          '%s%s' % (self.live_server_url,
-#                                    '/'
-#                                    ))
-#         page_url = self.selenium.current_url
-#         self.assertEqual(page_url,
-#                          '%s%s' % (self.live_server_url,
-#                                    '/'
-#                                    ))
-#         self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title) 
-#         # We open the page in localhost server to login   
-#         wait = WebDriverWait(self.selenium, 20)     
-#         self.selenium.get(
-#             '%s%s' % (self.live_server_url, '/accounts/login/')
-#             )
-#         # time.sleep(2)
-#         page_url = self.selenium.current_url
-#         self.assertEqual(page_url,
-#                          '%s%s' % (self.live_server_url,
-#                                    '/accounts/login/'
-#                                    ))
-#         self.assertIn("Se connecter", self.selenium.title)
-#         # time.sleep(2)
-        
-#         username_input = self.selenium.find_element_by_name("username")
-#         username_input.send_keys('houche@orange.fr')
-#         password_input = self.selenium.find_element_by_name("password")
-#         password_input.send_keys('felixt12')
-        
-#         wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
-#         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
-#         time.sleep(5)
+    @classmethod
+    def tearDownClass(cls):
+        # to find the test , we quit the webdriver
+        cls.selenium.quit()
+        super().tearDownClass()
+
+    def test_send_email(self):
+        """
+        We test if a email is send
+        """
+        # Send message.
+        mail.send_mail(
+            'Demande échange de séance',
+            'Pour reinitialiser le message taper sur le lien: https://lien',
+            'jacob@orange.fr', ['to@example.com'],
+            fail_silently=False,
+        )
+        # time.sleep(2)
+        # Test that one message has been sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # Verify that the subject of the first message is correct.
+        self.assertEqual(
+            mail.outbox[0].subject,
+            'Demande échange de séance')
+
+    def test_call_exchange_selenium(self):
+        self.selenium.get(
+            '%s%s' % (self.live_server_url, '/')
+            )
+        page_url = self.selenium.current_url
+        self.assertEqual(page_url,
+                         '%s%s' % (self.live_server_url,
+                                   '/'
+                                   ))
+        page_url = self.selenium.current_url
+        self.assertEqual(page_url,
+                         '%s%s' % (self.live_server_url,
+                                   '/'
+                                   ))
+        self.assertIn("Atelier- Terre au Bout des Doigts", self.selenium.title)
+        # We open the page in localhost server to login
+        wait = WebDriverWait(self.selenium, 20)
+        self.selenium.get(
+            '%s%s' % (self.live_server_url, '/accounts/login/')
+            )
+        # time.sleep(2)
+        page_url = self.selenium.current_url
+        self.assertEqual(page_url,
+                         '%s%s' % (self.live_server_url,
+                                   '/accounts/login/'
+                                   ))
+        self.assertIn("Se connecter", self.selenium.title)
+        # time.sleep(2)
+
+        username_input = self.selenium.find_element_by_name("username")
+        username_input.send_keys('houche@orange.fr')
+        password_input = self.selenium.find_element_by_name("password")
+        password_input.send_keys('felixt12')
+
+        wait.until(EC.element_to_be_clickable((By.XPATH,
+                                               '//button[@type="submit"]')))
+        self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
+
+        # That folowing test is functionnel on developpement,
+        # but disfunction with Travis
         # wait.until(EC.element_to_be_clickable((By.XPATH,'//a[@id="mapage"]')))
 
-
-        # time.sleep(3)
         # # we go in the page registerCall to call an exchangemeeting
-        # wait = WebDriverWait(self.selenium, 20) 
+        # wait = WebDriverWait(self.selenium, 10)
         # self.selenium.get(
         #             '%s%s' % (self.live_server_url, '/members/PageMember/'))
-        
+
         # page_url = self.selenium.current_url
 
         # self.assertEqual(page_url,
@@ -93,7 +111,7 @@ from selenium.webdriver.common.by import By
         #                            ))
         # self.assertIn("Adhérents de l'association", self.selenium.title)
         # call_ici=self.selenium.find_element_by_xpath('//h3[@id="ici"]').click()
-        
+
         # # we fill the form
         # wait.until(EC.presence_of_element_located((By.NAME,'call_meeting_0')))
         # call_meeting_0_input = self.selenium.find_element_by_name(
@@ -129,7 +147,7 @@ from selenium.webdriver.common.by import By
         # free_date3_1_input.send_keys(0)
         # free_date3_2_input = self.selenium.find_element_by_name("free_date3_2")
         # free_date3_2_input.send_keys(2021)
-        # wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))      
+        # wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))
         # self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         # # time.sleep(2)
         # # we logout to test the caledarexchangemeeting
@@ -138,7 +156,7 @@ from selenium.webdriver.common.by import By
         #     )
         # # time.sleep(3)
         # # We open a new page  in localhost server to login
-        # wait = WebDriverWait(self.selenium, 10) 
+        # wait = WebDriverWait(self.selenium, 10)
         # self.selenium.get(
         #     '%s%s' % (self.live_server_url, '/accounts/login/')
         #     )
@@ -151,7 +169,7 @@ from selenium.webdriver.common.by import By
         # self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
         # # time.sleep(3)
         # # We go to the page CalendarexchangeMeeting to accept an exchange
-        # wait = WebDriverWait(self.selenium, 10) 
+        # wait = WebDriverWait(self.selenium, 10)
         # self.selenium.get('%s%s' % (self.live_server_url,
         #                             '/members/CalendarExchangeMeeting/'))
         # page_url = self.selenium.current_url
