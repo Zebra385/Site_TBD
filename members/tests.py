@@ -1,10 +1,14 @@
 from django.test import TestCase
+from django.urls import reverse
+from django.core import mail
+from members.forms import ExchangeMeetingForm
 from members.create_calendar import calendar, read_json
 from members.create_calendar import calendar1, calendar_customuser
 from members.models import CalendarMeeting, CalendarCustomuser
 from members.models import ExchangeMeeting, ListExchangeMeeting, Meeting
 from accounts.models import CustomUser
-from members.views import AccueilMemberView, CalendarExchangeMeeting
+from members.views import AccueilMemberView
+from members.views import CalendarExchangeMeeting
 
 
 class AccueilMemberViewTestCase(TestCase):
@@ -72,34 +76,122 @@ class AccueilMemberViewTestCase(TestCase):
         self.assertIn('calendar_customuser', context)
 
 
-class CalendarExchangeMeetingTestCase(TestCase):
+class CallExchangeMeetingTestCase(TestCase):
+    """
+    This test to test a call of exchange meeting
+    """
+    fixtures = [
+        'calendarmeeting_demo.json',
+        'meeting_demo.json',
+        'gang_demo.json',
+        'customuser_demo.json',
+        'calendarcustomuser_demo.json'
+        ]
 
     def setUp(self):
         """
-        We create data in the  tables CalendarMeeting CalendarCustomuser
-        and Customuser
+        We create data for this test
         """
-        CustomUser.objects.create(username='jacob',
-                                  email='jacob@orange.fr',
-                                  password='top_secret'
-                                  )
-        CustomUser.objects.create(username='adrien',
-                                  email='adrien@orange.fr',
-                                  password='secret_top'
-                                  )
-        self.user = CustomUser.objects.get(username='adrien')
+        self.user = CustomUser.objects.get(username='HOUCHE')
+        self.form_class = ExchangeMeetingForm
+        self.groupe = Meeting.objects.get(day="Mercredi")
+
+    def test_get_call(self):
+        """
+        Test the method get
+        """
+        response = self.client.login(
+                                     username='houche@orange.fr',
+                                     password='felixt12'
+                                     )
+        self.assertEqual(response, True)
+        user = CustomUser.objects.get(username="HOUCHE")
+        request = self.client.get(
+            reverse('members:registercall'),
+            data={"auth_user": user, })
+        self.assertEqual(request.status_code, 200)
+        self.assertTemplateUsed(request, 'members/register_call.html')
+
+    def test_post_call(self):
+        """
+        Test the method post
+        """
+
+        response1 = self.client.login(
+                                      username='houche@orange.fr',
+                                      password='felixt12'
+                                      )
+        self.assertEqual(response1, True)
+        user = CustomUser.objects.get(username="HOUCHE")
+        response = self.client.post(
+            reverse('members:registercall'),
+            data={
+                  "auth_user": user,
+                  'call_meeting_0': 5,
+                  'call_meeting_1': 1,
+                  'call_meeting_2': 2021,
+                  'groupe': 2,
+                  'free_date1_0': 6,
+                  'free_date1_1': 1,
+                  'free_date1_2': 2021,
+                  'free_date2_0': 13,
+                  'free_date2_1': 1,
+                  'free_date2_2': 2021,
+                  'free_date3_0': 20,
+                  'free_date3_1': 1,
+                  'free_date3_2': 2021,
+                })
+        # code 302 because redirection to
+        # the /members/ConfirmCallExchangeMeeting/
+        # self.assertEqual(response.call_meeting,'2021-01-05')
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, '/members/ConfirmCallExchangeMeeting/')
+
+    def test_send_call_email(self):
+        """
+        We test if a email is send
+        """
+        # Send message.
+        mail.send_mail(
+            'Rendez-vous sur le site ',
+            'Demande d\'échange de séance',
+            'jacob@orange.fr', ['to@example.com'],
+            fail_silently=False,
+        )
+        # time.sleep(2)
+        # Test that one message has been sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # Verify that the subject of the first message is correct.
+        self.assertEqual(
+            mail.outbox[0].subject,
+            'Rendez-vous sur le site ')
+
+
+class CalendarExchangeMeetingTestCase(TestCase):
+    """
+    Test an accept exchange of meeting
+    """
+    fixtures = [
+        'calendarmeeting_demo.json',
+        'meeting_demo.json',
+        'gang_demo.json',
+        'customuser_demo.json',
+        'calendarcustomuser_demo.json'
+        ]
+
+    def setUp(self):
+        """
+        Data for this test
+        """
+
+        self.user = CustomUser.objects.get(username='HOUCHE')
         # we need 2 meetings for ExchangeMeeting
         # the first for caller
-        CalendarMeeting.objects.create(
-                date="2021-01-05",
-                )
         self.date1 = CalendarMeeting.objects.get(
                 date="2021-01-05",
                 )
         # the second  for date free for the caller
-        CalendarMeeting.objects.create(
-                date="2021-01-06",
-                )
         self.date2 = CalendarMeeting.objects.get(
                 date="2021-01-06",)
         # we create an exchange meeting
@@ -108,15 +200,10 @@ class CalendarExchangeMeetingTestCase(TestCase):
                 caller=self.user,
                 caller_meeting=self.date1
             )
-        self.exchange_meeting = ExchangeMeeting.objects.create(
+        self.exchange_meeting = ExchangeMeeting.objects.get(
                 exchange_operational=False)
         # We create group
 
-        Meeting.objects.create(
-                day="Mercredi",
-                time_slot="19h30-22h00",
-                time=2.5,
-                )
         self.groupe = Meeting.objects.get(day="Mercredi")
         # we create an list exchange meeting
         ListExchangeMeeting.objects.create(
@@ -128,6 +215,7 @@ class CalendarExchangeMeetingTestCase(TestCase):
                 )
         self.list_exchange_meeting = ListExchangeMeeting.objects.get(
                 exchange_meeting=self.exchange_meeting)
+        self.form_class = ExchangeMeetingForm
 
     def test_environment_set_in_context(self):
         """
@@ -135,7 +223,7 @@ class CalendarExchangeMeetingTestCase(TestCase):
         """
         request = self.client.get(
             '/',
-            data={'listexchangemeeting': self.list_exchange_meeting, })
+            data={'listexchangemeeting': self.exchange_meeting, })
         request.user = self.user
         view = CalendarExchangeMeeting()
         view.setup(request)
@@ -144,3 +232,45 @@ class CalendarExchangeMeetingTestCase(TestCase):
         view.object_list = view.get_queryset()
         context = view.get_context_data()
         self.assertIn('listexchangemeeting', context)
+
+    def test_post_confirm(self):
+        """
+        Test methode post
+        """
+        response1 = self.client.login(
+                                      username='houche@gmail.com',
+                                      password='felixt25'
+                                      )
+        self.assertEqual(response1, True)
+        choice = self.list_exchange_meeting.id
+        response = self.client.post(reverse('members:calendarexchangemeeting'),
+                                    data={
+                                        'choice': choice,
+                                        'elements': 1,
+                                        })
+        # code 302 because redirection to
+        # the /members/ConfirmAcceptExchangeMeeting/
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response,
+                             '/members/ConfirmAcceptExchangeMeeting/'
+                             )
+
+    def test_send_confirm_email(self):
+        """
+        We test if a email is send
+        """
+        # Send message.
+        mail.send_mail(
+            'Confirmation échange',
+            'Demande d\'échange de séance',
+            'jacob@orange.fr', ['to@example.com'],
+            fail_silently=False,
+        )
+        # time.sleep(2)
+        # Test that one message has been sent.
+        self.assertEqual(len(mail.outbox), 1)
+
+        # Verify that the subject of the first message is correct.
+        self.assertEqual(
+            mail.outbox[0].subject,
+            'Confirmation échange')

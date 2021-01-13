@@ -89,7 +89,8 @@ class CallExchangeMeeting(View):
             date_meeting1 = form.cleaned_data['free_date1']
             date_meeting2 = form.cleaned_data['free_date2']
             date_meeting3 = form.cleaned_data['free_date3']
-
+            # for test
+            # print('date_meeting vaut',date_meeting1)
             date_meeting1 = CalendarMeeting.objects.get(date=date_meeting1)
             if date_meeting2 != datetime.date(2020, 1, 1):
                 date_meeting2 = CalendarMeeting.objects.get(date=date_meeting2)
@@ -137,6 +138,9 @@ class CallExchangeMeeting(View):
             )
             return redirect("members:confirmcallexchangemeeting")
         else:
+            # for test
+            # print('form non valid')
+            # print(form.errors)
             context = {'form': form}
             return render(request,  self.template_name, context)
 

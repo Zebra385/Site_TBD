@@ -1,19 +1,33 @@
+dist: bionic
+services:
+  - postgresql
+  - xvfb
 language: python
 python:
   - '3.6'
 
-before_script:
+os: linux
+
+
+install:
   - pip3 install -r requirements.txt
 
 
-services:
-  - postgresql
+
 
 env: DJANGO_SETTINGS_MODULE=tbd_project.settings.travis
+before_script:
+  - wget "https://github.com/mozilla/geckodriver/releases/download/v0.28.0/geckodriver-v0.28.0-linux64.tar.gz"
+  - tar xfz geckodriver-v0.28.0-linux64.tar.gz
+  - sudo mv geckodriver /usr/local/bin
+  - 'export DISPLAY=:99.0'
+  - xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 &
+  - sleep 3
 
 
 script:
-  - python3 manage.py test
+    - python3 manage.py test
+
 
 # safelist
 branches:
