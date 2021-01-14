@@ -126,14 +126,13 @@ class CallExchangeMeeting(View):
             mail_user_gang = []
             for gang in gang:
                 mail_user_gang.append(gang.auth_user.email)
-            mail_gang = ['houche.serge@gmail.com', ]
             obj_message = 'Demande d\'échange de séance sur le site de Terre'
             obj_message = obj_message + ' au bout des doigts'
             send_mail(
                 obj_message,
                 message,
                 'houche.zebra385@gmail.com',
-                mail_gang,
+                mail_user_gang,
                 fail_silently=False,
             )
             return redirect("members:confirmcallexchangemeeting")
