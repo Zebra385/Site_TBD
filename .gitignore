@@ -139,3 +139,7 @@ customuser.json
 
 # command to  verify the  datas
 members/management/commands/control_data_customuser.py
+
+# tried test selenium about site in production
+fonctionnel_test/project_accounts.py
+fonctionnel_test/project_members.py

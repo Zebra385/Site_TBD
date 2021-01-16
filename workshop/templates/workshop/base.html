@@ -45,8 +45,19 @@
         </nav>
         {% block content %}{% endblock %}
         <!-- Footer-->
-        <footer class="bg-light py-5">
-            <div class="container"><div class="small text-center text-muted">Copyright © 2020 - Start Bootstrap</div></div>
+        <footer class="bg-light ">
+            <div class="container  text-center my-auto">
+                <div class="row">
+            
+                    <div class="col-lg-4 mx-auto"> <a class="nav-link js-scroll-trigger" href=" {% url 'workshop:copyright' %}" title="copyright" alt="copyright"><h6>Mentions Légales</h6> </a>
+                    </div>
+                    <div class="col-lg-6"><div class="small text-center text-muted">Copyright © 2020 - Start Bootstrap</div></div>
+                    <div class="col-lg-2 mx-auto"><a class="nav-link js-scroll-trigger" href="/#contact"><h6 text-right>Contact</h6></a>
+                    </div>                       
+                    
+                </div>
+            </div>
+    
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
