@@ -4,6 +4,8 @@ from django.core import mail
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
+import time
+from members.models import Meeting
 
 
 class TestCallExchangeMeeting(StaticLiveServerTestCase):
@@ -47,7 +49,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
             'jacob@orange.fr', ['to@example.com'],
             fail_silently=False,
         )
-        # time.sleep(2)
+        time.sleep(3)
         # Test that one message has been sent.
         self.assertEqual(len(mail.outbox), 1)
 
@@ -76,33 +78,34 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         self.selenium.get(
             '%s%s' % (self.live_server_url, '/accounts/login/')
             )
-        # time.sleep(2)
+        time.sleep(3)
         page_url = self.selenium.current_url
         self.assertEqual(page_url,
                          '%s%s' % (self.live_server_url,
                                    '/accounts/login/'
                                    ))
         self.assertIn("Se connecter", self.selenium.title)
-        # time.sleep(2)
+        time.sleep(3)
 
         username_input = self.selenium.find_element_by_name("username")
         username_input.send_keys('houche@orange.fr')
+        time.sleep(3)
         password_input = self.selenium.find_element_by_name("password")
         password_input.send_keys('felixt12')
 
         wait.until(EC.element_to_be_clickable((By.XPATH,
                                                '//button[@type="submit"]')))
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
-
+        time.sleep(3)
         # That folowing test is functionnel on developpement,
         # but disfunction with Travis
         # wait.until(EC.element_to_be_clickable((By.XPATH,'//a[@id="mapage"]')))
-
+        # time.sleep(3)
         # # we go in the page registerCall to call an exchangemeeting
         # wait = WebDriverWait(self.selenium, 10)
         # self.selenium.get(
         #             '%s%s' % (self.live_server_url, '/members/PageMember/'))
-
+        # time.sleep(2)
         # page_url = self.selenium.current_url
 
         # self.assertEqual(page_url,
@@ -111,7 +114,7 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         #                            ))
         # self.assertIn("Adhérents de l'association", self.selenium.title)
         # call_ici=self.selenium.find_element_by_xpath('//h3[@id="ici"]').click()
-
+        # time.sleep(3)
         # # we fill the form
         # wait.until(EC.presence_of_element_located((By.NAME,'call_meeting_0')))
         # call_meeting_0_input = self.selenium.find_element_by_name(
@@ -123,10 +126,10 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         # call_meeting_2_input = self.selenium.find_element_by_name(
         #     "call_meeting_2")
         # call_meeting_2_input.send_keys(2021)
-        # self.groupe = Meeting.objects.get(day="Mercredi")
+        # groupe = Meeting.objects.get(pk=3)
         # groupe_input = self.selenium.find_element_by_name("groupe")
-        # groupe_input.send_keys(str(self.groupe))
-
+        # groupe_input.send_keys(str(groupe))
+        # time.sleep(3)
         # free_date1_0_input = self.selenium.find_element_by_name("free_date1_0")
         # free_date1_0_input.send_keys(6)
         # free_date1_1_input = self.selenium.find_element_by_name("free_date1_1")
@@ -149,31 +152,32 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         # free_date3_2_input.send_keys(2021)
         # wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))
         # self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
-        # # time.sleep(2)
+        # time.sleep(3)
         # # we logout to test the caledarexchangemeeting
         # self.selenium.get(
         #     '%s%s' % (self.live_server_url, '/accounts/logout/')
         #     )
-        # # time.sleep(3)
+        # time.sleep(3)
         # # We open a new page  in localhost server to login
         # wait = WebDriverWait(self.selenium, 10)
         # self.selenium.get(
         #     '%s%s' % (self.live_server_url, '/accounts/login/')
         #     )
-        # # time.sleep(3)
+        # time.sleep(3)
         # username_input = self.selenium.find_element_by_name("username")
         # username_input.send_keys('houche@gmail.com')
+        # time.sleep(3)
         # password_input = self.selenium.find_element_by_name("password")
         # password_input.send_keys('felixt25')
         # wait.until(EC.element_to_be_clickable((By.XPATH,'//button[@type="submit"]')))
         # self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
-        # # time.sleep(3)
+        # time.sleep(3)
         # # We go to the page CalendarexchangeMeeting to accept an exchange
         # wait = WebDriverWait(self.selenium, 10)
         # self.selenium.get('%s%s' % (self.live_server_url,
         #                             '/members/CalendarExchangeMeeting/'))
         # page_url = self.selenium.current_url
-        # # time.sleep(5)
+        # time.sleep(3)
         # self.assertEqual(page_url, '%s%s' %
         #     (self.live_server_url, '/members/CalendarExchangeMeeting/'))
         # self.assertIn("les demandes d'échanges de séances en cours",
@@ -182,10 +186,10 @@ class TestCallExchangeMeeting(StaticLiveServerTestCase):
         # self.selenium.find_element_by_xpath(
         #     '//input[@type="checkbox"][@value="1"]'
         #     ).click()
-        # # time.sleep(3)
+        # time.sleep(3)
         # # self.selenium.find_element_by_xpath('//input[@type="hidden"][@id="choice1"]')
-        # # time.sleep( 3 )
+        # time.sleep( 3 )
         # self.selenium.find_element_by_xpath(
         #     '//button[@type="submit"][@value="Accepter cette échange"]'
         #     ).click()
-        # # time.sleep(3)
+        # time.sleep(3)
