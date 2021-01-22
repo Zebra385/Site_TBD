@@ -202,5 +202,5 @@ def calendar_customuser(list1, list2):
 def date_french(date):
     """ To have date in French """
     locale.setlocale(locale.LC_TIME, '')
-    date_french = date.strftime("%A %w %B %Y")
+    date_french = date.strftime("%A %d %B %Y")
     return date_french
