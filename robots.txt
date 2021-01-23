@@ -1,3 +1,4 @@
 # autorisation for robot to google without the folder PageMember
 User-agent: *
 Disallow: /PageMember/
+Sitemap: https://terreboutdoigts.fr/sitemap.xml

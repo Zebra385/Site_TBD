@@ -1,6 +1,7 @@
 from django.urls import path
 from .views import AccueilMemberView, CalendarExchangeMeeting
 from .views import CallExchangeMeeting, ConfirmCallExchangeMeeting
+from .views import ResetExchangeMeeting
 from .views import ConfirmAcceptExchangeMeeting
 # from .views import LoginUser
 # from .views import RegistrationView
@@ -29,5 +30,9 @@ urlpatterns = [
     path('ConfirmAcceptExchangeMeeting/',
          ConfirmAcceptExchangeMeeting.as_view(),
          name="confirmacceptexchangemeeting"
+         ),
+    path('ResetExchangeMeeting/',
+         ResetExchangeMeeting.as_view(),
+         name="resetexchangemeeting"
          ),
 ]
