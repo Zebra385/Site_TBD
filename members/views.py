@@ -277,3 +277,33 @@ class ConfirmCallExchangeMeeting(TemplateView):
     class to confirm  call exchange meeting
     """
     template_name = 'members/confirm_call_exchange_meeting.html'
+
+
+@method_decorator(login_required(login_url='login'),
+                  name='dispatch')
+class ResetExchangeMeeting(ListView):
+    """
+    that class to reset an  exchange meeting
+    """
+    form_class = ExchangeMeetingForm
+    template_name = 'members/register_call.html'
+
+    def get(self, request, *args, **kwargs):
+        user = self.request.user
+        auth_user = CustomUser.objects.get(pk=user.id)
+        form = self.form_class(initial={'auth_user': auth_user, })
+        context = {'form': form, }
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        # we take the id of the person who is connect
+        auth_user = request.user
+        selected_choice = request.POST.get('choice')
+        pk = selected_choice
+        meeting = ListExchangeMeeting.objects.get(id=pk)
+        exchangemeeting = ExchangeMeeting.objects.get(
+            pk=meeting.exchange_meeting.id
+            )
+        exchangemeeting.exchange_operational = True
+        exchangemeeting.save()
+        return redirect("members:calendarexchangemeeting")

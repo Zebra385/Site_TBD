@@ -57,10 +57,17 @@
     <section class="page-section bg-secondary" >
         <div class="container">  
             <hr class="divider my-6" />
-            <div class="col-lg-12 text-center">
-                <h2 class="text text-white font-weight-bold mt-0mt-0">Moi (Mme/M.) {{meeting.exchange_meeting.caller}} ai effectué une demande d'échange de séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
-            </div>
-            <hr class="divider my-6" />
+            <form  action="{% url 'members:resetexchangemeeting' %}"   method="POST"  accept-charset="utf-8">
+                {% csrf_token %}
+                <div class="col-lg-12 text-center">
+                    <h2 class="text text-white font-weight-bold mt-0mt-0">Moi (Mme/M.) {{meeting.exchange_meeting.caller}} ai effectué une demande d'échange de séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
+                </div>
+                <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{meeting.pk}}">
+                <button type="submit" class=" btn btn-success float-right"  type="submit" value="Annuler cette échange">Annuler cette échange</button>
+                    </br>
+                <hr class="divider my-6" />
+
+            </form>
         </div>
 
     </section>
