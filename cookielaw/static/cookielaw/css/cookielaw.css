@@ -2,10 +2,12 @@
 #CookielawBanner {
     background: rgb(233, 150, 150);
     padding: 15px 0;
+    color: #fff;
 }
 
 #CookielawBanner .container {
     position: relative;
+    color: #fff;
 }
 
 #CookielawBanner #CookielawCross {
