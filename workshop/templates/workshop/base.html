@@ -19,6 +19,8 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="{% static 'workshop/css/styles.css' %}" rel="stylesheet" />
+        <!-- cookielaw CSS -->
+        <link href="{% static 'cookielaw/css/cookielaw.css' %}" rel="stylesheet" />
         <!-- CSS Bootstrap_table-->
         <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.css">
     </head>
@@ -43,14 +45,12 @@
                 </div>
             </div>
         </nav>
-        {% load i18n static %}
-         {% load cookielaw_tags %}
-         
-         {% cookielaw_banner%}
+        
     
          
     
         {% block content %}{% endblock %}
+        
        
     
         <!-- Footer-->
