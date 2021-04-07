@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'workshop.apps.WorkshopConfig',
     'members.apps.MembersConfig',
+    'cookielaw',
     
 ]
 

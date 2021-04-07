@@ -43,7 +43,16 @@
                 </div>
             </div>
         </nav>
+        {% load i18n static %}
+         {% load cookielaw_tags %}
+         
+         {% cookielaw_banner%}
+    
+         
+    
         {% block content %}{% endblock %}
+       
+    
         <!-- Footer-->
         <footer class="bg-light ">
             <div class="container  text-center my-auto">
@@ -68,6 +77,9 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         
         <!-- Core theme JS-->
+        
+        <script src="{% static 'cookielaw/js/cookielaw.js' %}"></script>
         <script src="{% static 'workshop/js/scripts.js' %}"></script>
+      
     </body>
 </html>
