@@ -1,6 +1,5 @@
-from .views import AccueilView, CoursView, StagesView, CopyrightView
-from django.urls import path, include
-
+from .views import AccueilView, CoursView, StagesView, CopyrightView, CookiesView
+from django.urls import path
 app_name = "workshop"
 
 urlpatterns = [
@@ -8,4 +7,5 @@ urlpatterns = [
     path('cours/', CoursView.as_view(), name="cours"),
     path('stages/', StagesView.as_view(), name="stages"),
     path('copyright/', CopyrightView.as_view(), name="copyright"),
+    path('cookie_policy/', CookiesView.as_view(), name="cookie_policy"),
 ]

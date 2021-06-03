@@ -37,3 +37,7 @@ class StagesView(TemplateView):
 class CopyrightView(TemplateView):
     """That class to give the url of all copyright use to build this site"""
     template_name = 'workshop/copyright.html'
+
+class CookiesView(TemplateView):
+    """That class to present the policiy of cookies"""
+    template_name = 'workshop/cookie-policy.html'
