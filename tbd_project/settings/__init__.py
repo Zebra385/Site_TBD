@@ -54,6 +54,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
 ]
 AUTHENTICATION_BACKENDS = [
     'accounts.backends.EmailBackend'

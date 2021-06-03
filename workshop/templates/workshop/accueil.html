@@ -17,10 +17,10 @@
                         <h1 class="text-uppercase text-white font-weight-bold">La Terre au Bout des Doigts</h1>
                         <hr class="divider my-4" />
                     </div>
-                    {% load i18n static %}
+                    <!-- {% load i18n static %}
                     {% load cookielaw_tags %}
                     
-                    {% cookielaw_banner%}
+                    {% cookielaw_banner%} -->
                     <div class="col-lg-8 align-self-baseline">
                         <p class="text-white-75 font-weight-light mb-5">La Terre au Bout des Doigts est née de la passion commune d'un groupe pour le modelage et la céramique.
                         Encouragée par ses 40 adhérents tous "envoûtés" par la terre et portée par ce groupe, l'association a pris son envol en début d'année 2016 .</p>
@@ -162,5 +162,5 @@
         <!-- Calendar of meetings-->
         {% include 'members/calendar_meeting.html' %}
         <!-- Contact-->
-        
+        {% include 'workshop/contact.html' %}
 {% endblock %}
