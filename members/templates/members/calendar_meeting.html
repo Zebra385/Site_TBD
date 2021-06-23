@@ -14,19 +14,75 @@
                 <thead>
                     <tr class="table-active text-center">
                         <th>Mois</th>
-                        <th colspan="5">mardi</th>
-                        <th colspan="5">mercredi</th>
-                        <th colspan="5">jeudi</th>
+                        <th  style="background-color:#c7cccc" colspan="5">mardi</th>
+                        <th style="background-color:#9c9c99" colspan="5">mercredi</th>
+                        <th style="background-color:#c7cccc" colspan="5">jeudi</th>
                     </tr>
                 </thead>
                 <tbody>
                     {% for date_list in calendar %}
                         <tr>
-                                {%if forloop.counter == 1%}
+                            {%if forloop.counter == 1%}
+                        <td class="table-primary">Septembre</td>
+                            {% for date in date_list %}
+                            
+                                {% if  date.month == 8   or  date.year == 2021 and date.month == 1 %} 
+                                    <td class="table-primary">.</td>
+                                {% else%}      
+                                    <td class="table-primary">{{date.day}}</td>
+                                {% endif %}
+                            
+                            {% endfor %}
+                        {%endif%}
+                        </tr>
+                        <tr>
+                            {%if forloop.counter == 2%}
+                        <td class="table-secondary">Octobre</td>
+                            {% for date in date_list %}
+                            
+                            {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                            <td class="table-secondary">.</td>
+                                {% else%}      
+                                    <td class="table-secondary">{{date.day}}</td>
+                                {% endif %}
+                            
+                            {% endfor %}
+                        {%endif%}
+                        </tr>
+                        <tr>
+                            {%if forloop.counter == 3%}
+                        <td class="table-primary">Novembre</td>
+                            {% for date in date_list %}
+                            
+                            {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                            <td class="table-primary">.</td>
+                                {% else%}      
+                                    <td class="table-primary">{{date.day}}</td>
+                                {% endif %}
+                            
+                            {% endfor %}
+                        {%endif%}
+                        </tr>
+                        <tr>
+                            {%if forloop.counter == 4%}
+                        <td class="table-secondary">Décembre</td>
+                            {% for date in date_list %}
+                            
+                            {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                            <td class="table-secondary">.</td>
+                                {% else%}      
+                                    <td class="table-secondary">{{date.day}}</td>
+                                {% endif %}
+                            
+                            {% endfor %}
+                        {%endif%}
+                        </tr>
+                        <tr>
+                                {%if forloop.counter == 5%}
                             <td class="table-primary">Janvier</td>
                                 {% for date in date_list %}
                                 
-                                    {% if date.month == 9 or date.year == 2020%} 
+                                {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
                                         <td class="table-primary">.</td>
                                     {% else%}      
                                         <td class="table-primary">{{date.day}}</td>
@@ -36,11 +92,11 @@
                             {%endif%}
                         </tr>
                         <tr>
-                            {%if forloop.counter == 2%}
+                            {%if forloop.counter == 6%}
                                 <td class="table-secondary">Février</td>
                                     {% for date in date_list%}
-                                    {% if date.month == 9 %} 
-                                        <td class="table-secondary">.</td>
+                                    {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                                    <td class="table-secondary">.</td>
                                     {% else%}      
                                         <td class="table-secondary">{{date.day}}</td>
                                     {% endif %}            
@@ -48,11 +104,11 @@
                             {%endif%}
                         </tr>
                         <tr>
-                            {%if forloop.counter == 3%}
+                            {%if forloop.counter == 7%}
                                 <td class="table-primary">Mars</td>
                                     {% for date in date_list%}
-                                    {% if date.month == 9 %} 
-                                        <td class="table-primary">.</td>
+                                    {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                                    <td class="table-primary">.</td>
                                     {% else%}      
                                         <td class="table-primary">{{date.day}}</td>
                                     {% endif %}            
@@ -60,11 +116,11 @@
                             {%endif%}
                         </tr>
                         <tr>
-                            {%if forloop.counter == 4%}
+                            {%if forloop.counter == 8%}
                                 <td class="table-secondary">Avril</td>
                                     {% for date in date_list%}
-                                    {% if date.month == 9 %} 
-                                        <td class="table-secondary">.</td>
+                                    {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                                    <td class="table-secondary">.</td>
                                     {% else%}      
                                         <td class="table-secondary">{{date.day}}</td>
                                     {% endif %}            
@@ -72,11 +128,11 @@
                             {%endif%}
                         </tr>
                         <tr>
-                            {%if forloop.counter == 5%}
+                            {%if forloop.counter == 9%}
                                 <td class="table-primary">Mai</td>
                                     {% for date in date_list%}
-                                    {% if date.month == 9 %} 
-                                        <td class="table-primary">.</td>
+                                    {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                                    <td class="table-primary">.</td>
                                     {% else%}      
                                         <td class="table-primary">{{date.day}}</td>
                                     {% endif %}            
@@ -84,11 +140,11 @@
                             {%endif%}
                         </tr>
                         <tr>
-                            {%if forloop.counter == 6%}
+                            {%if forloop.counter == 10%}
                                 <td class="table-secondary">Juin</td>
                                     {% for date in date_list%}
-                                    {% if date.month == 9 %} 
-                                        <td class="table-secondary">.</td>
+                                    {% if date.month == 8 or date.year == 2021 and date.month == 1%} 
+                                    <td class="table-secondary">.</td>
                                     {% else%}      
                                         <td class="table-secondary">{{date.day}}</td>
                                     {% endif %}            
@@ -125,18 +181,18 @@
                 </thead>
                 <tbody>              
                     <tr>
-                        <td class="table-primary">Janvier</td>
+                        <td class="table-primary">Septembre</td>
                             {% for key, value in calendar_customuser%}
                                 {% if forloop.counter <= 15 %}
                                     
                                     {% if value == False%}
-                                        {% if key.month == 7 or key.year == 2020%} 
+                                        {% if key.month == 7 or key.month == 8%} 
                                             <td class="table-primary">.</td>
                                         {% else%}      
                                             <td class="table-primary">{{key.day}}</td>
                                         {% endif %}
                                     {% else%}
-                                        {% if key.month == 7 or key.year == 2020%} 
+                                        {% if key.month == 7 or key.month == 8%} 
                                             <td class="table-primary">.</td>
                                         {% else%}      
                                             <td class="table-success">{{key.day}}</td>
@@ -146,18 +202,18 @@
                             {% endfor%}      
                         </tr>
                         <tr>
-                            <td class="table-secondary">Février</td>
+                            <td class="table-secondary">Ocobre</td>
                              {% for key, value in calendar_customuser%}
                                 {% if forloop.counter <= 30 and forloop.counter >= 16 %}
                                     
                                     {% if value == False%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-secondary">.</td>
                                         {% else%}      
                                             <td class="table-secondary">{{key.day}}</td>
                                         {% endif %}
                                     {% else%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-secondary">.</td>
                                         {% else%}      
                                             <td class="table-success">{{key.day}}</td>
@@ -167,18 +223,18 @@
                             {% endfor%}  
                         </tr>
                         <tr>
-                            <td class="table-primary">Mars</td>
+                            <td class="table-primary">Novembre</td>
                              {% for key, value in calendar_customuser%}
                                 {% if forloop.counter <= 45 and forloop.counter >= 31 %}
                                     
                                     {% if value == False%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-primary">.</td>
                                         {% else%}      
                                             <td class="table-primary">{{key.day}}</td>
                                         {% endif %}
                                     {% else%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-primary">.</td>
                                         {% else%}      
                                             <td class="table-success">{{key.day}}</td>
@@ -188,18 +244,18 @@
                             {% endfor%}  
                         </tr>
                         <tr>
-                            <td class="table-secondary">Avril</td>
+                            <td class="table-secondary">Décembre</td>
                              {% for key, value in calendar_customuser%}
                                 {% if forloop.counter <= 60 and forloop.counter >=  46 %}
                                     
                                     {% if value == False%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-secondary">.</td>
                                         {% else%}      
                                             <td class="table-secondary">{{key.day}}</td>
                                         {% endif %}
                                     {% else%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-secondary">.</td>
                                         {% else%}      
                                             <td class="table-success">{{key.day}}</td>
@@ -209,18 +265,18 @@
                             {% endfor%}             
                         </tr>
                         <tr> 
-                            <td class="table-primary">Mai</td>
+                            <td class="table-primary">Janvier</td>
                              {% for key, value in calendar_customuser%}
                                 {% if forloop.counter <= 75 and forloop.counter >=  61 %}
                                     
                                     {% if value == False%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-primary">.</td>
                                         {% else%}      
                                             <td class="table-primary">{{key.day}}</td>
                                         {% endif %}
                                     {% else%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-primary">.</td>
                                         {% else%}      
                                             <td class="table-success">{{key.day}}</td>
@@ -230,18 +286,102 @@
                             {% endfor%}       
                         </tr>
                         <tr>
-                            <td class="table-secondary">Juin</td>
+                            <td class="table-secondary">Février</td>
                              {% for key, value in calendar_customuser%}
                                 {% if forloop.counter <= 90 and forloop.counter >= 76 %}
                                     
                                     {% if value == False%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8%} 
                                             <td class="table-secondary">.</td>
                                         {% else%}      
                                             <td class="table-secondary">{{key.day}}</td>
                                         {% endif %}
                                     {% else%}
-                                        {% if key.month == 7 %} 
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-success">{{key.day}}</td>
+                                        {% endif %}
+                                    {% endif%}
+                                {%endif%}
+                            {% endfor%}         
+                        </tr>
+                        <tr>
+                            <td class="table-secondary">Mars</td>
+                             {% for key, value in calendar_customuser%}
+                                {% if forloop.counter <= 105 and forloop.counter >= 91 %}
+                                    
+                                    {% if value == False%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-secondary">{{key.day}}</td>
+                                        {% endif %}
+                                    {% else%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-success">{{key.day}}</td>
+                                        {% endif %}
+                                    {% endif%}
+                                {%endif%}
+                            {% endfor%}         
+                        </tr>
+                        <tr>
+                            <td class="table-secondary">Avril</td>
+                             {% for key, value in calendar_customuser%}
+                                {% if forloop.counter <= 120 and forloop.counter >= 106 %}
+                                    
+                                    {% if value == False%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-secondary">{{key.day}}</td>
+                                        {% endif %}
+                                    {% else%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-success">{{key.day}}</td>
+                                        {% endif %}
+                                    {% endif%}
+                                {%endif%}
+                            {% endfor%}         
+                        </tr>
+                        <tr>
+                            <td class="table-secondary">Mai</td>
+                             {% for key, value in calendar_customuser%}
+                                {% if forloop.counter <= 135 and forloop.counter >= 121 %}
+                                    
+                                    {% if value == False%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-secondary">{{key.day}}</td>
+                                        {% endif %}
+                                    {% else%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-success">{{key.day}}</td>
+                                        {% endif %}
+                                    {% endif%}
+                                {%endif%}
+                            {% endfor%}         
+                        </tr>
+                        <tr>
+                            <td class="table-secondary">Juin</td>
+                             {% for key, value in calendar_customuser%}
+                                {% if forloop.counter <= 150 and forloop.counter >= 136 %}
+                                    
+                                    {% if value == False%}
+                                        {% if key.month == 7 or key.month == 8 %} 
+                                            <td class="table-secondary">.</td>
+                                        {% else%}      
+                                            <td class="table-secondary">{{key.day}}</td>
+                                        {% endif %}
+                                    {% else%}
+                                        {% if key.month == 7 or key.month == 8 %} 
                                             <td class="table-secondary">.</td>
                                         {% else%}      
                                             <td class="table-success">{{key.day}}</td>

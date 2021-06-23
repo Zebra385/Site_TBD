@@ -16,7 +16,7 @@ class AccueilView(ListView):
         # test
         # for date in self.calendar:
         #     print('self.calendar.date vaut:', date)
-        #     print('self.calendar.date.day vaut:', date[0].month)
+            
         return self.calendar
 
     def get_context_data(self, **kwargs):
