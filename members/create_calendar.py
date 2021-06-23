@@ -21,7 +21,7 @@ def read_json(file):
 def calendar(calendar_list):
     """
     Make a list by day of week with function day_list
-    and make good list , it add a day 2021-09-09
+    and make good list , it add a day 2022-08-30
     to have five day by day of week
     """
     tuesday_list = good_list(day_list(calendar_list, 1))
@@ -34,14 +34,18 @@ def calendar(calendar_list):
                                      thursday_list
                                      )
     # separate list  by month to have  15 days per month
-    janary_list = month_list(regroup_good_list, 0)
-    february_list = month_list(regroup_good_list, 1)
-    mars_list = month_list(regroup_good_list, 2)
-    april_list = month_list(regroup_good_list, 3)
-    may_list = month_list(regroup_good_list, 4)
-    jun_list = month_list(regroup_good_list, 5)
+    september_list = month_list(regroup_good_list, 0)
+    october_list = month_list(regroup_good_list, 1)
+    november_list = month_list(regroup_good_list, 2)
+    december_list = month_list(regroup_good_list, 3)
+    janary_list = month_list(regroup_good_list, 4)
+    february_list = month_list(regroup_good_list, 5)
+    mars_list = month_list(regroup_good_list, 6)
+    april_list = month_list(regroup_good_list, 7)
+    may_list = month_list(regroup_good_list, 8)
+    jun_list = month_list(regroup_good_list, 9)
 
-    return janary_list, february_list, mars_list, april_list, may_list, jun_list
+    return september_list, october_list, november_list, december_list, janary_list, february_list, mars_list, april_list, may_list, jun_list
 
 
 def day_list(list, number_day_week):
@@ -79,14 +83,18 @@ def calendar1(calendar_list):
                                      thursday_list
                                      )
     # separate list  by month to have  15 days per month
-    janary_list = month_list(regroup_good_list, 0)
-    february_list = month_list(regroup_good_list, 1)
-    mars_list = month_list(regroup_good_list, 2)
-    april_list = month_list(regroup_good_list, 3)
-    may_list = month_list(regroup_good_list, 4)
-    jun_list = month_list(regroup_good_list, 5)
+    september_list = month_list(regroup_good_list, 0)
+    october_list = month_list(regroup_good_list, 1)
+    november_list = month_list(regroup_good_list, 2)
+    december_list = month_list(regroup_good_list, 3)
+    janary_list = month_list(regroup_good_list, 4)
+    february_list = month_list(regroup_good_list, 5)
+    mars_list = month_list(regroup_good_list, 6)
+    april_list = month_list(regroup_good_list, 7)
+    may_list = month_list(regroup_good_list, 8)
+    jun_list = month_list(regroup_good_list, 9)
 
-    return janary_list, february_list, mars_list, april_list, may_list, jun_list
+    return september_list, october_list, november_list, december_list, janary_list, february_list, mars_list, april_list, may_list, jun_list
 
 
 def day_list1(list, number_day_week):
@@ -108,26 +116,37 @@ def day_list1(list, number_day_week):
 def good_list(list):
     """function to have 5 day per day_week  by month"""
     counter = 0
-
+    
     while counter <= 15:
-        for month in range(0, 6):
+        for month in range(0, 10):
             for i in range(0+(int(month)*5), 5+(int(month)*5)):
-
+              
+                
                 try:
-                    if int(list[i].month) == 9:
+                    if int(list[i].month) == 8:
                         pass
-                    elif int(list[i].month) != month+1 and int(list[i].month) != 9:
-                        list.insert(i, datetime.date(2021, 9, 9))
+                    elif int(list[i].month) <= 6:
+                        if int(list[i].month) != month-3 and int(list[i].month) != 8:
+                            list.insert(i, datetime.date(2022, 8, 30))
+                        counter += 1
+
+                    elif int(list[i].month) >= 9:
+                        if int(list[i].month) != month+9 and int(list[i].month) != 8:
+                            list.insert(i, datetime.date(2022, 8, 30))
                     counter += 1
                 except:
-                    list.append(datetime.date(2021, 9, 9))
+                    list.append(datetime.date(2022, 8, 30))
                     counter += 1
+            
+                    
+               
+
     return list
 
 
 def regroup_list(list1, list2, list3):
     regroup_good_list = []
-    for i in range(6):
+    for i in range(10):
         begin = int(0 + i*5)
         end = int(5 + i*5)
         regroup_good_list = regroup_good_list + list1[begin:end]
@@ -158,7 +177,7 @@ def calendar_customuser(list1, list2):
     list2_day = []
 
     for day in list1:
-        if day != datetime.date(2021, 9, 9):
+        if day != datetime.date(2022, 8, 30):
             list1_day += day
 
     for day in list2:
@@ -172,17 +191,17 @@ def calendar_customuser(list1, list2):
             list_day.append(False)
     counterday = 1
     counterdate = 1
-    # Now we replace datetime.date(2021,9,9) by date of july in ascending order
+    # Now we replace datetime.date(2022,8,30) by date of july in ascending order
     for day in list2_day:
-        if day == datetime.date(2021, 9, 9):
+        if day == datetime.date(2022, 8, 30):
             if counterday <= 31:
-                list2_day[counterdate-1] = datetime.date(2021, 7, counterday)
+                list2_day[counterdate-1] = datetime.date(2022, 7, counterday)
                 counterday += 1
 
             # Now we replace datetime.date(2021,9,9) by date of
             # aout in ascending order  if july is too litle
             elif counterday > 31:
-                list2_day[counterdate-1] = datetime.date(2021,
+                list2_day[counterdate-1] = datetime.date(2022,
                                                          8,
                                                          counterday-30
                                                          )

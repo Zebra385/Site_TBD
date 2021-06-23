@@ -34,3 +34,4 @@ class Command(BaseCommand):
             CalendarMeeting.objects.update_or_create(
                 date=date,
                 )
+            print('date:',date)
