@@ -127,6 +127,11 @@ class ListExchangeMeeting(models.Model):
     exchange_meeting = models.ForeignKey(ExchangeMeeting,
                                          on_delete=models.CASCADE
                                          )
+    groupe_caller = models.ForeignKey(Meeting,
+                               related_name='groupe1_caller', 
+                               on_delete=models.CASCADE,
+                               null=True
+                               )                                                
     date_meeting1 = models.ForeignKey(CalendarMeeting,
                                       related_name='date2_meeting1',
                                       blank=True,
@@ -144,6 +149,7 @@ class ListExchangeMeeting(models.Model):
                                       on_delete=models.CASCADE
                                       )
     groupe = models.ForeignKey(Meeting,
+                               related_name='groupe2_accepter', 
                                on_delete=models.CASCADE,
                                null=True
                                )
