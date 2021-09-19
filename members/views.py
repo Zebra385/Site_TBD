@@ -75,6 +75,9 @@ class CallExchangeMeeting(View):
         form = self.form_class(request.POST)
         if form.is_valid():
             auth_user = self.request.user
+            # add groupe of caller
+            groupe_caller = Gang.objects.get(pk=auth_user.id)
+            groupe_caller = groupe_caller.meeting_id
             # auth_user=CustomUser.objects.get(pk=user.id)
             call_meeting = form.cleaned_data['call_meeting']
             call_meeting = CalendarMeeting.objects.get(date=call_meeting)
@@ -113,6 +116,7 @@ class CallExchangeMeeting(View):
                 )
             list_exchange_meeting = ListExchangeMeeting.objects.update_or_create(
                 exchange_meeting=exchange_meeting_id,
+                groupe_caller=groupe_caller,
                 date_meeting1=date_meeting1,
                 date_meeting2=date_meeting2,
                 date_meeting3=date_meeting3,
