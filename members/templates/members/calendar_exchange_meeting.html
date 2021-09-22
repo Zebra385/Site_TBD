@@ -23,7 +23,7 @@
 {%for meeting in listexchangemeeting%} 
 
     {%if meeting.exchange_meeting.exchange_operational is False and meeting.exchange_meeting.caller.id != user.id %}
-        {%if meeting.exchange_meeting.groupe == "Mardi-19h30-22h00"%}
+        
             <section class="page-section bg-info" >
                 <div class="container">
                     <div class="col-lg-12 text-center">
@@ -54,7 +54,7 @@
                     </form>
                 </div>
             </section>
-        {% endif%}
+       
     {%elif meeting.exchange_meeting.exchange_operational is False and meeting.exchange_meeting.caller.id == user.id %}
             
         <section class="page-section bg-secondary" >
