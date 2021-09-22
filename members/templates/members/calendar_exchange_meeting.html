@@ -23,55 +23,61 @@
 {%for meeting in listexchangemeeting%} 
 
     {%if meeting.exchange_meeting.exchange_operational is False and meeting.exchange_meeting.caller.id != user.id %}
-    <section class="page-section bg-info" >
-        <div class="container">
-            <div class="col-lg-12 text-center">
-                <hr class="divider my-6" />
-                <h2 class="text text-white font-weight-bold mt-0">(Mme/M.) {{meeting.exchange_meeting.caller}} du groupe du {{meeting.groupe_caller}} aimerait échanger sa séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
-            </div>
-            
-            <form     method="POST"  accept-charset="utf-8">
-                {% csrf_token %}
-                
-                <div class="row form-inline">
-                    <ul class=" text-uppercase text-white font-weight-bold h2">
-                    Cocher d'abord votre choix si vous voulez accepter cette échange 
-                    <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="1">{{meeting.date_meeting1}}</li>
-                    {% if meeting.date_meeting2 is not None%}
-                        <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="2">{{meeting.date_meeting2}}</li>
-                    {% endif%}
-                    {% if meeting.date_meeting2 is not None%}
-                        <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="3">{{meeting.date_meeting3}}</li>
-                    {%endif%}
-                    </ul>
+        {%if meeting.exchange_meeting.groupe == "Mardi-19h30-22h00"%}
+            <section class="page-section bg-info" >
+                <div class="container">
+                    <div class="col-lg-12 text-center">
+                        <hr class="divider my-6" />
+                        <h2 class="text text-white font-weight-bold mt-0">(Mme/M.) {{meeting.exchange_meeting.caller}} du groupe du {{meeting.groupe_caller}} aimerait échanger sa séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
+                    </div>
+                    
+                    <form     method="POST"  accept-charset="utf-8">
+                        {% csrf_token %}
+                        
+                        <div class="row form-inline">
+                            <ul class=" text-uppercase text-white font-weight-bold h2">
+                            Cocher d'abord votre choix si vous voulez accepter cette échange 
+                            <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="1">{{meeting.date_meeting1}}</li>
+                            {% if meeting.date_meeting2 is not None%}
+                                <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="2">{{meeting.date_meeting2}}</li>
+                            {% endif%}
+                            {% if meeting.date_meeting2 is not None%}
+                                <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="3">{{meeting.date_meeting3}}</li>
+                            {%endif%}
+                            </ul>
+                        </div>
+                            <h1>Pour accepter cette échange je dois être du groupe du  {{meeting.groupe}}</h1>
+                            <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{meeting.pk}}">
+                            <button type="submit" class=" btn btn-success float-right"  type="submit" value="Accepter cette échange">Accepter cette échange</button>
+                            </br>
+                            <hr class="divider my-6" />
+                    </form>
                 </div>
-            
-                    <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{meeting.pk}}">
-                    <button type="submit" class=" btn btn-success float-right"  type="submit" value="Accepter cette échange">Accepter cette échange</button>
-                    </br>
-                    <hr class="divider my-6" />
-            </form>
-        </div>
-    </section>
+            </section>
+        {% endif%}
     {%elif meeting.exchange_meeting.exchange_operational is False and meeting.exchange_meeting.caller.id == user.id %}
-    <section class="page-section bg-secondary" >
-        <div class="container">  
-            <hr class="divider my-6" />
-            <form  action="{% url 'members:resetexchangemeeting' %}"   method="POST"  accept-charset="utf-8">
-                {% csrf_token %}
-                <div class="col-lg-12 text-center">
-                    <h2 class="text text-white font-weight-bold mt-0mt-0">Moi (Mme/M.) {{meeting.exchange_meeting.caller}} ai effectué une demande d'échange de séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
-                </div>
-                <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{meeting.pk}}">
-                <button type="submit" class=" btn btn-success float-right"  type="submit" value="Annuler cette échange">Annuler cette échange</button>
-                    </br>
+            
+        <section class="page-section bg-secondary" >
+            <div class="container">  
+
+                
                 <hr class="divider my-6" />
+                <form  action="{% url 'members:resetexchangemeeting' %}"   method="POST"  accept-charset="utf-8">
+                    {% csrf_token %}
+                    <div class="col-lg-12 text-center">
+                        <h2 class="text text-white font-weight-bold mt-0mt-0">Moi (Mme/M.) {{meeting.exchange_meeting.caller}} ai effectué une demande d'échange de séance du {{meeting.exchange_meeting.caller_meeting}} avec une personne du groupe du {{meeting.groupe}}</h2>
+                    </div>
+                    <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{meeting.pk}}">
+                    <button type="submit" class=" btn btn-success float-right"  type="submit" value="Annuler cette échange">Annuler cette échange</button>
+                        </br>
+                    <hr class="divider my-6" />
 
-            </form>
-        </div>
+                </form>
+            </div>
 
-    </section>
+        </section>
     {% endif%}
+   
 {% endfor%} 
                
 {% endblock %}
