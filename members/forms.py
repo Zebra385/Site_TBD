@@ -1,5 +1,6 @@
 from django import forms
 from members.models import CalendarMeeting, Meeting
+import datetime
 from datetime import date
 
 
@@ -86,3 +87,6 @@ class ExchangeMeetingForm(forms.Form):
         elif free_date3 not in calendar:
             msg = "Cette date de séance n\'existe pas!"
             self.add_error('free_date3', msg)
+        elif free_date1 == datetime.date(2021, 1, 1):
+            msg = "Vous devez entrer au moins la première date"
+            self.add_error('free_date1', msg)

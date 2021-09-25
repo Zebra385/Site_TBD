@@ -95,12 +95,12 @@ class CallExchangeMeeting(View):
             # for test
             # print('date_meeting vaut',date_meeting1)
             date_meeting1 = CalendarMeeting.objects.get(date=date_meeting1)
-            if date_meeting2 != datetime.date(2020, 1, 1):
+            if date_meeting2 != datetime.date(2021, 1, 1):
                 date_meeting2 = CalendarMeeting.objects.get(date=date_meeting2)
             else:
                 date_meeting2 = None
 
-            if date_meeting3 != datetime.date(2020, 1, 1):
+            if date_meeting3 != datetime.date(2021, 1, 1):
                 date_meeting3 = CalendarMeeting.objects.get(date=date_meeting3)
             else:
                 date_meeting3 = None
