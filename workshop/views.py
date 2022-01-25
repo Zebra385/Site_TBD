@@ -29,6 +29,10 @@ class CoursView(TemplateView):
     """ That class to get the coursl page"""
     template_name = "workshop/cours.html"
 
+class AnimateurView(TemplateView):
+    """ That class to get the coursl page"""
+    template_name = "workshop/animateur.html"
+
 
 class StagesView(TemplateView):
     """ That class to get the stages page"""
