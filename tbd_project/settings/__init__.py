@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'tbd',
         # The user must be replave by your own name
         'USER': 'zebra385',
-        'PASSWORD': '',
+        'PASSWORD': 'maevateddy',
         'HOST': 'localhost',
         'PORT': '5432',
     }

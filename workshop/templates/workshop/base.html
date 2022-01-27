@@ -33,6 +33,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ml-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:cours' %}">Les cours</a></li>
+                        <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:animateur' %}">L'animateur</a></li>
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:stages' %}">Les stages</a></li>
                         {% comment %} <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galerie</a></li> {% endcomment %}
                         {% if user.is_authenticated %}
