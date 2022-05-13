@@ -9795,6 +9795,9 @@ button.bg-dark:focus {
 .text-white {
   color: #fff !important;
 }
+.text-red {
+  color: #f00 !important;
+}
 
 .text-primary {
   color: #f4623a !important;
