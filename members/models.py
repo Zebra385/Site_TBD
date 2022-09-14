@@ -109,8 +109,8 @@ class ExchangeMeeting(models.Model):
                                          )
     exchange_operational = models.BooleanField()
 
-    # def __str__(self):
-    #     return self.caller_id
+    def __str__(self):
+        return u'{0}'.format(self.caller_meeting.date)
 
     class Meta:
         """

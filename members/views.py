@@ -80,10 +80,9 @@ class CallExchangeMeeting(View):
             groupe_caller = groupe_caller.meeting_id
             # auth_user=CustomUser.objects.get(pk=user.id)
             call_meeting = form.cleaned_data['call_meeting']
-            call_meeting = CalendarMeeting.objects.get(date=call_meeting)
             # auth_user = form.cleaned_data['auth_user']
             auth_user = CustomUser.objects.get(username=auth_user)
-            # print("l'utilisateur est :",auth_user)
+            call_meeting = CalendarMeeting.objects.get(date=call_meeting)
             groupe_all = form.cleaned_data['groupe']
             groupe = str(groupe_all)
             groupe = groupe.split("-")
@@ -95,12 +94,11 @@ class CallExchangeMeeting(View):
             # for test
             # print('date_meeting vaut',date_meeting1)
             date_meeting1 = CalendarMeeting.objects.get(date=date_meeting1)
-            if date_meeting2 != datetime.date(2021, 1, 1):
+            if date_meeting2 != datetime.date(2022, 1, 1):
                 date_meeting2 = CalendarMeeting.objects.get(date=date_meeting2)
             else:
                 date_meeting2 = None
-
-            if date_meeting3 != datetime.date(2021, 1, 1):
+            if date_meeting3 != datetime.date(2022, 1, 1):
                 date_meeting3 = CalendarMeeting.objects.get(date=date_meeting3)
             else:
                 date_meeting3 = None
@@ -110,7 +108,6 @@ class CallExchangeMeeting(View):
                 caller=auth_user,
                 caller_meeting=call_meeting
             )
-            # print('exchange_meeting vaut', exchange_meeting[0].id)
             exchange_meeting_id = ExchangeMeeting.objects.get(
                 pk=exchange_meeting[0].id
                 )
@@ -234,7 +231,7 @@ class CalendarExchangeMeeting(ListView):
             email_acceptor,
             fail_silently=False,
         )
-        # delete old dates on  the calendars of caller and acceptor 
+        # delete old dates on  the calendars of caller and acceptor
         caller_calendar = CalendarCustomuser.objects.get(
             auth_user=exchangemeeting.caller,
             date_meeting=exchangemeeting.caller_meeting)

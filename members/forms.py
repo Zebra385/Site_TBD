@@ -1,7 +1,8 @@
 from django import forms
-from members.models import CalendarMeeting, Meeting
+from members.models import CalendarMeeting, Meeting, CalendarCustomuser, ExchangeMeeting
 import datetime
 from datetime import date
+from accounts.models import CustomUser
 
 
 class DateSelectorWidget(forms.MultiWidget):
@@ -11,7 +12,7 @@ class DateSelectorWidget(forms.MultiWidget):
     def __init__(self, attrs=None):
         days = [(day, day) for day in range(1, 32)]
         months = [(month, month) for month in range(1, 13)]
-        years = [(year, year) for year in [2021, 2022]]
+        years = [(year, year) for year in [2022, 2023]]
         widgets = [
             forms.Select(attrs=attrs, choices=days),
             forms.Select(attrs=attrs, choices=months),
@@ -62,21 +63,45 @@ class ExchangeMeetingForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
+        auth_user = cleaned_data.get("auth_user")
+        auth_user = CustomUser.objects.get(username=auth_user)
+        call_meeting = cleaned_data.get("call_meeting")
+        print('l utilisateur est ', auth_user)
         # créer le calendrier
         calendar = []
         calendar_all = CalendarMeeting.objects.all().order_by('date')
         for day in calendar_all:
             calendar.append(day.date)
-        # calendar = list(calendar.date)
-        # print('le calendar est : ', calendar)
-        call_meeting = cleaned_data.get("call_meeting")
-
+        calendar_user = list(
+            CalendarCustomuser.objects.filter(
+                auth_user_id=auth_user
+                ).order_by('date_meeting')
+                )
+        good_date = False
+        call_meeting_str = call_meeting.strftime('%Y-%m-%d')
+        for date in calendar_user:
+            if call_meeting_str == str(date):
+                good_date = True
+        calendar_exchange_user = list(ExchangeMeeting.objects.filter(
+                caller=auth_user, exchange_operational=False
+                ).order_by('caller_meeting')
+            )
+        exist_date = False
+        for date in calendar_exchange_user:
+            if call_meeting_str == str(date):
+                exist_date = True
         free_date1 = cleaned_data.get("free_date1")
         free_date2 = cleaned_data.get("free_date2")
         free_date3 = cleaned_data.get("free_date3")
-
         if call_meeting not in calendar:
-            msg = "Votre date de séance n\'existe pas!"
+            msg = "Votre date de séance n\'existe pas! dans le calendrier"
+            self.add_error('call_meeting', msg)
+        elif good_date is False:
+            msg = "cette date n\'existe pas dans votre calendrier des séances"
+            self.add_error('call_meeting', msg)
+        elif exist_date is True:
+            msg = "Vous avez dèjà fait une demande d'échange pour cette date,"
+            msg += "si vous voulait changer votre demande il faut d\'abord annuler la précédente"
             self.add_error('call_meeting', msg)
         elif free_date1 not in calendar:
             msg = "Cette date de séance n\'existe pas!"
@@ -87,6 +112,6 @@ class ExchangeMeetingForm(forms.Form):
         elif free_date3 not in calendar:
             msg = "Cette date de séance n\'existe pas!"
             self.add_error('free_date3', msg)
-        elif free_date1 == datetime.date(2021, 1, 1):
+        elif free_date1 == datetime.date(2022, 1, 1):
             msg = "Vous devez entrer au moins la première date"
             self.add_error('free_date1', msg)

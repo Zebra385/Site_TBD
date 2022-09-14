@@ -35,8 +35,8 @@
                         {% csrf_token %}
                         
                         <div class="row form-inline">
-                            <ul class=" text-uppercase text-white font-weight-bold h2">
-                            Cocher d'abord votre choix si vous voulez accepter cette échange 
+                            <ul class=" text-uppercase text-white font-weight-bold h2" style="list-style:none">
+                            Cocher d'abord un seul choix 
                             <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="1">{{meeting.date_meeting1}}</li>
                             {% if meeting.date_meeting2 is not None%}
                                 <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="2">{{meeting.date_meeting2}}</li>
@@ -44,6 +44,8 @@
                             {% if meeting.date_meeting2 is not None%}
                                 <li><input class="text text-white font-weight-bold mt-0" type="checkbox" name="elements" value="3">{{meeting.date_meeting3}}</li>
                             {%endif%}
+                            <ul class=" text-uppercase text-white font-weight-bold h2">
+                                puis cliquer sur le bouton vert "accepter cette échange" 
                             </ul>
                         </div>
                             <h1>Pour accepter cette échange je dois être du groupe du  {{meeting.groupe}}</h1>
