@@ -17,9 +17,11 @@ class Command(BaseCommand):
         # gang=3 wenesday evening,
         # gang=4 thursday morning,
         # gang=5 thursday afternoon,
+        # number_per_gang 
+        number_per_gang = 12
         for number_gang in range(0, 5):
-            begin = int(3 + number_gang*9)
-            end = int(12 + number_gang*9)
+            begin = int(3 + number_gang*number_per_gang)
+            end = int(15 + number_gang*number_per_gang)
             for number_id in range(begin, end):
                 # We fill the table Customuser
                 auth_user = CustomUser.objects.get(pk=number_id)

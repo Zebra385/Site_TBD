@@ -21,8 +21,10 @@ class Command(BaseCommand):
         for user in all_users:
             meeting = []
             t = CustomUser.objects.get(pk=user.id).id
-            # t==1 for the administrator and t > 48 for the teachers
-            if t == 1 or t > 48:
+            number_per_gang = 12
+            max_custumuser = 3 + (5 * number_per_gang)
+            # t==1 for the administrator and t > max_custumuser for the teachers
+            if t == 1 or t > max_custumuser:
                 pass
             else:
                 try:
