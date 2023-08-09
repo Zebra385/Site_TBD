@@ -13,9 +13,11 @@ class AccueilView(ListView):
     def get_queryset(self):
         self.day_list = list(CalendarMeeting.objects.all().order_by('date'))
         self.calendar = calendar(self.day_list)
+        # print('++++++++++++++++++', self.day_list)
         # test
-        # for date in self.calendar:
-        #     print('self.calendar.date vaut:', date)
+        # 
+        #for date in self.calendar:
+             #print('self.calendar.date vaut:', date)
             
         return self.calendar
 

@@ -35,12 +35,12 @@
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:cours' %}">Les cours</a></li>                        
                         <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'workshop:stages' %}">Les stages</a></li>
                         {% comment %} <li class="nav-item"><a class="nav-link js-scroll-trigger" href="#portfolio">Galerie</a></li> {% endcomment %}
-                        {% if user.is_authenticated %}
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:logout' %}">Se déconnecter</a></li>
-                             <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'members:pagemember' %}" id="mapage">Ma page</a></li>
-                        {% else %}
-                            <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:login' %}" title="Réserver aux adhérents">Se connecter</a></li>                        
-                        {% endif%} 
+                        <!-- {% if user.is_authenticated %} -->
+                            <!-- li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:logout' %}">Se déconnecter</a></li -->
+                             <!--li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'members:pagemember' %}" id="mapage">Ma page</a></li --> 
+                        <!-- {% else %} -->
+                            <!--li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'accounts:login' %}" title="Réserver aux adhérents">Se connecter</a></li -->                        
+                        <!-- !--{% endif%} -->
                     </ul>
                 </div>
             </div>
