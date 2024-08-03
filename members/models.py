@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 
 DICTIONNARY_MEETING = (
+    ["Lundi", "19h30-22h00", 3.5],
     ["Mardi", "14h30-17h30", 3],
     ["Mardi", "19h30-22h00", 3.5],
     ["Mercredi", "19h30-22h00", 2.5],
