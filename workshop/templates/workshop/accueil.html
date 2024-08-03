@@ -159,7 +159,15 @@
         <!-- where are we-->
         {% include 'workshop/location.html' %}
         <!-- Calendar of meetings-->
-        {% include 'members/calendar_meeting.html' %}
+        <section class="page-section" background-color="#86ebe6">
+            
+                <div class="container">
+                                <a  href="{% static 'workshop/assets/img/calendar_tbd_2024.png'%}">
+                                    <img class="img" src="{% static 'workshop/assets/img/calendar_tbd_2024.png'%}" alt="" />                            
+                                </a>
+                </div>
+           
+        </section>
         <!-- Contact-->
         {% include 'workshop/contact.html' %}
 {% endblock %}
