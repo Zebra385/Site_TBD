@@ -22,7 +22,7 @@ def calendar(calendar_list):
     # print('!!!!!!!!!!!!!!!!!!!calendarlist.',calendar_list)
     """
     Make a list by day of week with function day_list
-    and make good list , it add a day 2023-08-30
+    and make good list , it add a day 2024-08-30
     to have five day by day of week
     """
     monday_list = good_list(day_list(calendar_list, 0))
@@ -138,15 +138,15 @@ def good_list(list):
                         pass
                     elif int(list[i].month) <= 6:
                         if int(list[i].month) != month-3 and int(list[i].month) != 8:
-                            list.insert(i, datetime.date(2023, 8, 30))
+                            list.insert(i, datetime.date(2024, 8, 30))
                         counter += 1
 
                     elif int(list[i].month) >= 9:
                         if int(list[i].month) != month+9 and int(list[i].month) != 8:
-                            list.insert(i, datetime.date(2023, 8, 30))
+                            list.insert(i, datetime.date(2024, 8, 30))
                     counter += 1
                 except:
-                    list.append(datetime.date(2023, 8, 30))
+                    list.append(datetime.date(2024, 8, 30))
                     counter += 1
             
                     
@@ -189,7 +189,7 @@ def calendar_customuser(list1, list2):
     list2_day = []
 
     for day in list1:
-        if day != datetime.date(2023, 8, 30):
+        if day != datetime.date(2024, 8, 30):
             list1_day += day
 
     for day in list2:
@@ -203,17 +203,17 @@ def calendar_customuser(list1, list2):
             list_day.append(False)
     counterday = 1
     counterdate = 1
-    # Now we replace datetime.date(2023,8,30) by date of july in ascending order
+    # Now we replace datetime.date(2024,8,30) by date of july in ascending order
     for day in list2_day:
-        if day == datetime.date(2023, 8, 30):
+        if day == datetime.date(2024, 8, 30):
             if counterday <= 31:
-                list2_day[counterdate-1] = datetime.date(2023, 7, counterday)
+                list2_day[counterdate-1] = datetime.date(2024, 7, counterday)
                 counterday += 1
 
             # Now we replace datetime.date(2021,9,9) by date of
             # aout in ascending order  if july is too litle
             elif counterday > 31:
-                list2_day[counterdate-1] = datetime.date(2023,
+                list2_day[counterdate-1] = datetime.date(2024,
                                                          8,
                                                          counterday-30
                                                          )
